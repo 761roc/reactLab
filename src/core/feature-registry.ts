@@ -1,4 +1,5 @@
 import { mobxDemoFeature } from '../features/mobx-demo';
+import { recoilDemoFeature } from '../features/recoil-demo';
 import { reduxDemoFeature } from '../features/redux-demo';
 import { tailwindDemoFeature } from '../features/tailwind-demo';
 import { zustandDemoFeature } from '../features/zustand-demo';
@@ -8,7 +9,8 @@ export const featureRegistry: FeatureModule[] = [
   tailwindDemoFeature,
   reduxDemoFeature,
   mobxDemoFeature,
-  zustandDemoFeature
+  zustandDemoFeature,
+  recoilDemoFeature
 ];
 
 export const defaultFeature = featureRegistry[0];

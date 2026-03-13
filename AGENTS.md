@@ -112,5 +112,6 @@
 - Redux Demo：多 slice 分块演示 + 同组件多 slice 联合使用。
 - MobX Demo：多 store 分块演示 + 同组件多 store 联合使用。
 - Zustand Demo：多状态分区分块演示 + 同组件联合状态读取与组合操作。
+- Recoil Demo：多 atom/selector 分块演示 + 同组件联合状态读取与组合更新。
 
 后续新增功能时，遵循相同模式，保持低耦合和可扩展性。
