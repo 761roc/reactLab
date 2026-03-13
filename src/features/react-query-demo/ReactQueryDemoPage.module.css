@@ -1,0 +1,123 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+.note {
+  margin: 8px 0 0;
+  color: #475569;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.infoCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.infoCard p {
+  margin: 0 0 6px;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.metaText {
+  color: #475569;
+  font-size: 13px;
+}
+
+.button,
+.buttonGhost,
+.projectItem {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.buttonGhost {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+}
+
+.buttonGhost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.projectList,
+.todoList,
+.hintList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.projectItem {
+  width: 100%;
+  text-align: left;
+  border-color: #e2e8f0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.projectItem span {
+  font-size: 13px;
+  color: #475569;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.todoDone {
+  color: #64748b;
+  text-decoration: line-through;
+}
+
+.hintList li {
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 10px;
+  background: #f8fafc;
+}
