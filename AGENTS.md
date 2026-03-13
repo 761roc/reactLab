@@ -109,6 +109,7 @@
 ## 7) 当前已实现功能（用于后续会话快速对齐）
 
 - Tailwind Demo：复杂样式分块演示。
+- React Context Demo：useReducer + Context 分块演示 + 同组件联合状态操作。
 - Redux Demo：多 slice 分块演示 + 同组件多 slice 联合使用。
 - MobX Demo：多 store 分块演示 + 同组件多 store 联合使用。
 - Zustand Demo：多状态分区分块演示 + 同组件联合状态读取与组合操作。
