@@ -113,5 +113,6 @@
 - MobX Demo：多 store 分块演示 + 同组件多 store 联合使用。
 - Zustand Demo：多状态分区分块演示 + 同组件联合状态读取与组合操作。
 - Recoil Demo：多 atom/selector 分块演示 + 同组件联合状态读取与组合更新。
+- Jotai Demo：多 atom 分块演示 + 派生/写入 atom + 同组件联合状态操作。
 
 后续新增功能时，遵循相同模式，保持低耦合和可扩展性。

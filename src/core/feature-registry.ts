@@ -1,3 +1,4 @@
+import { jotaiDemoFeature } from '../features/jotai-demo';
 import { mobxDemoFeature } from '../features/mobx-demo';
 import { recoilDemoFeature } from '../features/recoil-demo';
 import { reduxDemoFeature } from '../features/redux-demo';
@@ -10,7 +11,8 @@ export const featureRegistry: FeatureModule[] = [
   reduxDemoFeature,
   mobxDemoFeature,
   zustandDemoFeature,
-  recoilDemoFeature
+  recoilDemoFeature,
+  jotaiDemoFeature
 ];
 
 export const defaultFeature = featureRegistry[0];
