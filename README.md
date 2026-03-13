@@ -1,6 +1,6 @@
 # React Feature Lab
 
-Low-coupling React feature playground for learning CSS/UI/state libraries (Tailwind, Redux, MobX).
+Low-coupling React feature playground for learning CSS/UI/state libraries (Tailwind, Redux, MobX, Zustand).
 
 ## Architecture
 
