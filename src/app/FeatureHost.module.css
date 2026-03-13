@@ -1,0 +1,11 @@
+.panel {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 24px;
+  min-height: 420px;
+}
+
+.loading {
+  color: #64748b;
+}

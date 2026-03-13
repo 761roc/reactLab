@@ -1,0 +1,173 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+.note {
+  margin: 8px 0 0;
+  color: #475569;
+}
+
+.counterPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.counterValue {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.button,
+.buttonGhost,
+.filterButton,
+.todoToggle,
+.todoRemove {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.buttonGhost {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+}
+
+.todoControls {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto auto;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.todoInput {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 10px;
+  outline: none;
+}
+
+.todoInput:focus {
+  border-color: #0f172a;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.filterButton {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  text-transform: capitalize;
+}
+
+.filterButtonActive {
+  border-color: #0f172a;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.todoList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.todoToggle {
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+.todoRemove {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.todoDone {
+  color: #64748b;
+  text-decoration: line-through;
+}
+
+.preferencesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metaLabel {
+  margin: 0 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+}
+
+.summaryPanel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin-bottom: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.summaryPanel p {
+  margin: 0;
+}
+
+@media (max-width: 920px) {
+  .todoControls {
+    grid-template-columns: 1fr;
+  }
+
+  .preferencesGrid,
+  .summaryPanel {
+    grid-template-columns: 1fr;
+  }
+}
