@@ -1,15 +1,32 @@
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PersistenceControlPanel, type PersistenceModeOption } from '../../common/ui/PersistenceControlPanel';
 import { SectionCard } from '../../common/ui/SectionCard';
+import { useReduxDemoPersistenceControls } from './ReduxDemoProviders';
 import { decrement, increment, reset } from './redux/counterSlice';
 import { cycleDensity, setTheme, toggleHints } from './redux/preferencesSlice';
 import { addTodo, clearCompleted, removeTodo, setTodoFilter, toggleTodo } from './redux/todoSlice';
-import type { AppDispatch, RootState } from './redux/store';
+import type { AppDispatch, RootState, PersistMode } from './redux/store';
 import styles from './ReduxDemoPage.module.css';
+
+const persistModeOptions: Array<PersistenceModeOption<PersistMode>> = [
+  {
+    value: 'whitelist',
+    label: '白名单模式',
+    description: '仅保存 counter，其他 slice 不落地。'
+  },
+  {
+    value: 'blacklist',
+    label: '黑名单模式',
+    description: '排除 preferences，其余 slice 落地。'
+  }
+];
 
 export default function ReduxDemoPage() {
   const dispatch = useDispatch<AppDispatch>();
   const [draft, setDraft] = useState('');
+
+  const { enabled, mode, setEnabled, setMode, clearPersistedState, ruleDescription, storageKey } = useReduxDemoPersistenceControls();
 
   const count = useSelector((state: RootState) => state.counter.value);
   const todoItems = useSelector((state: RootState) => state.todo.items);
@@ -39,9 +56,24 @@ export default function ReduxDemoPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header>
-        <h2 className={styles.title}>Redux playground</h2>
-        <p className={styles.note}>Redux store lives only in this feature via withProviders().</p>
+      <header className={styles.headerRow}>
+        <div className={styles.headerMain}>
+          <h2 className={styles.title}>Redux playground</h2>
+          <p className={styles.note}>Redux store lives only in this feature via withProviders().</p>
+        </div>
+
+        <PersistenceControlPanel
+          enabled={enabled}
+          mode={mode}
+          modeOptions={persistModeOptions}
+          onClear={clearPersistedState}
+          onModeChange={setMode}
+          onToggle={setEnabled}
+          ruleDescription={ruleDescription}
+          storageKeyLabel={enabled ? storageKey : 'disabled'}
+          subtitle="切换策略后刷新页面，观察状态保留差异"
+          title="Redux 持久化演示"
+        />
       </header>
 
       <SectionCard note="用意：演示单一 slice 的基础读写和 action 派发。" title="块 1：Counter Slice（基础状态管理）">
