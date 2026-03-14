@@ -4,6 +4,18 @@
   gap: 20px;
 }
 
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.headerMain {
+  max-width: 560px;
+}
+
 .title {
   margin: 0;
   font-size: 30px;

@@ -1,10 +1,26 @@
 import { useState } from 'react';
+import { PersistenceControlPanel, type PersistenceModeOption } from '../../common/ui/PersistenceControlPanel';
 import { SectionCard } from '../../common/ui/SectionCard';
-import { useZustandDemoStore } from './ZustandDemoProviders';
+import { useZustandDemoPersistenceControls, useZustandDemoStore } from './ZustandDemoProviders';
+import type { PersistMode } from './stores/createZustandDemoStore';
 import styles from './ZustandDemoPage.module.css';
+
+const persistModeOptions: Array<PersistenceModeOption<PersistMode>> = [
+  {
+    value: 'whitelist',
+    label: '白名单模式',
+    description: '仅保存 count，用于最小持久化演示。'
+  },
+  {
+    value: 'blacklist',
+    label: '黑名单模式',
+    description: '排除 theme/density/showHints，其它状态保留。'
+  }
+];
 
 export default function ZustandDemoPage() {
   const [draft, setDraft] = useState('');
+  const { enabled, mode, setEnabled, setMode, clearPersistedState, ruleDescription, storageKey } = useZustandDemoPersistenceControls();
 
   const count = useZustandDemoStore((state) => state.count);
   const increment = useZustandDemoStore((state) => state.increment);
@@ -41,9 +57,24 @@ export default function ZustandDemoPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header>
-        <h2 className={styles.title}>Zustand playground</h2>
-        <p className={styles.note}>Zustand store lives only in this feature via withProviders().</p>
+      <header className={styles.headerRow}>
+        <div className={styles.headerMain}>
+          <h2 className={styles.title}>Zustand playground</h2>
+          <p className={styles.note}>Zustand store lives only in this feature via withProviders().</p>
+        </div>
+
+        <PersistenceControlPanel
+          enabled={enabled}
+          mode={mode}
+          modeOptions={persistModeOptions}
+          onClear={clearPersistedState}
+          onModeChange={setMode}
+          onToggle={setEnabled}
+          ruleDescription={ruleDescription}
+          storageKeyLabel={enabled ? storageKey : 'disabled'}
+          subtitle="切换策略后刷新页面，观察 Zustand 状态保留差异"
+          title="Zustand 持久化演示"
+        />
       </header>
 
       <SectionCard note="用意：演示 createStore + selector 的基础状态读写。" title="块 1：Counter State（基础状态管理）">

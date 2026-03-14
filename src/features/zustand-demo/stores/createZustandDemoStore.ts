@@ -1,9 +1,20 @@
 import { createStore } from 'zustand/vanilla';
 import type { StoreApi } from 'zustand';
 
-type TodoFilter = 'all' | 'active' | 'done';
+export type PersistMode = 'whitelist' | 'blacklist';
+export type TodoFilter = 'all' | 'active' | 'done';
 
-interface TodoItem {
+export const ZUSTAND_PERSIST_KEYS = {
+  whitelist: 'zustand-demo-whitelist',
+  blacklist: 'zustand-demo-blacklist'
+} as const;
+
+export const ZUSTAND_PERSIST_RULES = {
+  whitelist: ['count'],
+  blacklist: ['theme', 'density', 'showHints']
+} as const;
+
+export interface TodoItem {
   id: number;
   text: string;
   done: boolean;
@@ -11,6 +22,16 @@ interface TodoItem {
 
 type ThemeMode = 'light' | 'dark';
 type DensityMode = 'cozy' | 'compact';
+
+export interface ZustandDemoSnapshot {
+  count?: number;
+  todoItems?: TodoItem[];
+  todoFilter?: TodoFilter;
+  nextTodoId?: number;
+  theme?: ThemeMode;
+  density?: DensityMode;
+  showHints?: boolean;
+}
 
 export interface ZustandDemoState {
   count: number;
@@ -36,19 +57,48 @@ export interface ZustandDemoState {
 
 export type ZustandDemoStore = StoreApi<ZustandDemoState>;
 
-export function createZustandDemoStore(): ZustandDemoStore {
-  return createStore<ZustandDemoState>((set, get) => ({
-    count: 0,
-    todoItems: [
+function createInitialState(initial?: ZustandDemoSnapshot) {
+  return {
+    count: initial?.count ?? 0,
+    todoItems: initial?.todoItems ?? [
       { id: 1, text: '拆分模块边界', done: true },
       { id: 2, text: '新增 Zustand Demo', done: false },
       { id: 3, text: '验证联合状态读取', done: false }
     ],
-    todoFilter: 'all',
-    nextTodoId: 4,
-    theme: 'light',
-    density: 'cozy',
-    showHints: true,
+    todoFilter: initial?.todoFilter ?? 'all',
+    nextTodoId: initial?.nextTodoId ?? 4,
+    theme: initial?.theme ?? 'light',
+    density: initial?.density ?? 'cozy',
+    showHints: initial?.showHints ?? true
+  };
+}
+
+export function buildZustandSnapshotByMode(state: ZustandDemoState, mode: PersistMode): ZustandDemoSnapshot {
+  if (mode === 'whitelist') {
+    return {
+      count: state.count
+    };
+  }
+
+  return {
+    count: state.count,
+    todoItems: state.todoItems.map((item) => ({ ...item })),
+    todoFilter: state.todoFilter,
+    nextTodoId: state.nextTodoId
+  };
+}
+
+export function createZustandDemoStore(initial?: ZustandDemoSnapshot): ZustandDemoStore {
+  const defaults = createInitialState(initial);
+
+  return createStore<ZustandDemoState>((set, get) => ({
+    count: defaults.count,
+    todoItems: defaults.todoItems,
+    todoFilter: defaults.todoFilter,
+    nextTodoId: defaults.nextTodoId,
+    theme: defaults.theme,
+    density: defaults.density,
+    showHints: defaults.showHints,
 
     increment: () => {
       set((state) => ({ count: state.count + 1 }));
