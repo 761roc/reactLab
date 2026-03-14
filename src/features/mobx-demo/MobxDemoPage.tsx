@@ -1,20 +1,51 @@
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
+import { PersistenceControlPanel, type PersistenceModeOption } from '../../common/ui/PersistenceControlPanel';
 import { SectionCard } from '../../common/ui/SectionCard';
-import { useMobxDemoStore } from './MobxDemoProviders';
+import { useMobxDemoPersistenceControls, useMobxDemoStore } from './MobxDemoProviders';
+import type { MobxPersistMode } from './stores/MobxDemoStore';
 import styles from './MobxDemoPage.module.css';
+
+const persistModeOptions: Array<PersistenceModeOption<MobxPersistMode>> = [
+  {
+    value: 'whitelist',
+    label: '白名单模式',
+    description: '仅保存 counter，便于观察最小持久化范围。'
+  },
+  {
+    value: 'blacklist',
+    label: '黑名单模式',
+    description: '排除 preferences，其它状态会保留。'
+  }
+];
 
 function MobxDemoPageInner() {
   const store = useMobxDemoStore();
   const [draft, setDraft] = useState('');
+  const { enabled, mode, setEnabled, setMode, clearPersistedState, ruleDescription, storageKey } = useMobxDemoPersistenceControls();
 
   const { counter, todo, preferences } = store;
 
   return (
     <div className={styles.wrapper}>
-      <header>
-        <h2 className={styles.title}>MobX playground</h2>
-        <p className={styles.note}>MobX store lives only in this feature via withProviders().</p>
+      <header className={styles.headerRow}>
+        <div className={styles.headerMain}>
+          <h2 className={styles.title}>MobX playground</h2>
+          <p className={styles.note}>MobX store lives only in this feature via withProviders().</p>
+        </div>
+
+        <PersistenceControlPanel
+          enabled={enabled}
+          mode={mode}
+          modeOptions={persistModeOptions}
+          onClear={clearPersistedState}
+          onModeChange={setMode}
+          onToggle={setEnabled}
+          ruleDescription={ruleDescription}
+          storageKeyLabel={enabled ? storageKey : 'disabled'}
+          subtitle="切换策略后刷新页面，观察 MobX 状态是否恢复"
+          title="MobX 持久化演示"
+        />
       </header>
 
       <SectionCard note="用意：演示 observable 状态 + action 更新。" title="块 1：Counter Store（基础状态管理）">

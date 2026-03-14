@@ -80,6 +80,14 @@
 - 演示复杂 utility 组合（响应式、状态样式、复杂布局、伪元素/任意值等）。
 - 通过 CSS Modules 证明 feature 级样式隔离。
 
+### 4.4 持久化功能规范（状态库 Demo）
+- 若 demo 支持本地持久化，优先复用 `src/common/ui/PersistenceControlPanel.tsx`。
+- 持久化控制区放在页面大标题右侧。
+- 必须包含：`switch 开关`、`白名单/黑名单模式切换`、`清空缓存`、`规则说明`、`storage key 显示`。
+- 白名单模式用于演示“仅持久化指定状态域”；黑名单模式用于演示“排除指定状态域”。
+- 持久化逻辑必须保持 feature 级隔离，禁止提升到全局壳层。
+- 缓存 key 命名建议：`<feature>-whitelist` / `<feature>-blacklist`。
+
 ---
 
 ## 5) 新增一个 Feature 的标准步骤

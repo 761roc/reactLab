@@ -1,16 +1,56 @@
 import { makeAutoObservable } from 'mobx';
 
+export type MobxPersistMode = 'whitelist' | 'blacklist';
+
+export const MOBX_PERSIST_KEYS = {
+  whitelist: 'mobx-demo-whitelist',
+  blacklist: 'mobx-demo-blacklist'
+} as const;
+
+export const MOBX_PERSIST_RULES = {
+  whitelist: ['counter'],
+  blacklist: ['preferences']
+} as const;
+
+type TodoFilter = 'all' | 'active' | 'done';
+
 interface TodoItem {
   id: number;
   text: string;
   done: boolean;
 }
 
+interface CounterSnapshot {
+  value: number;
+}
+
+interface TodoSnapshot {
+  items: TodoItem[];
+  filter: TodoFilter;
+  nextId: number;
+}
+
+interface PreferencesSnapshot {
+  theme: 'light' | 'dark';
+  density: 'cozy' | 'compact';
+  showHints: boolean;
+}
+
+export interface MobxDemoSnapshot {
+  counter?: CounterSnapshot;
+  todo?: TodoSnapshot;
+  preferences?: PreferencesSnapshot;
+}
+
 class CounterStore {
   value = 0;
 
-  constructor() {
-    makeAutoObservable(this);
+  constructor(initial?: CounterSnapshot) {
+    if (initial) {
+      this.value = initial.value;
+    }
+
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   increment() {
@@ -33,11 +73,17 @@ class TodoStore {
     { id: 3, text: '验证联合读取', done: false }
   ];
 
-  filter: 'all' | 'active' | 'done' = 'all';
+  filter: TodoFilter = 'all';
   nextId = 4;
 
-  constructor() {
-    makeAutoObservable(this);
+  constructor(initial?: TodoSnapshot) {
+    if (initial) {
+      this.items = initial.items;
+      this.filter = initial.filter;
+      this.nextId = initial.nextId;
+    }
+
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   get visibleTodos() {
@@ -79,7 +125,7 @@ class TodoStore {
     this.items = this.items.filter((item) => item.id !== id);
   }
 
-  setFilter(filter: 'all' | 'active' | 'done') {
+  setFilter(filter: TodoFilter) {
     this.filter = filter;
   }
 
@@ -93,8 +139,14 @@ class PreferencesStore {
   density: 'cozy' | 'compact' = 'cozy';
   showHints = true;
 
-  constructor() {
-    makeAutoObservable(this);
+  constructor(initial?: PreferencesSnapshot) {
+    if (initial) {
+      this.theme = initial.theme;
+      this.density = initial.density;
+      this.showHints = initial.showHints;
+    }
+
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   setTheme(theme: 'light' | 'dark') {
@@ -111,12 +163,34 @@ class PreferencesStore {
 }
 
 export class MobxDemoStore {
-  counter = new CounterStore();
-  todo = new TodoStore();
-  preferences = new PreferencesStore();
+  counter: CounterStore;
+  todo: TodoStore;
+  preferences: PreferencesStore;
 
-  constructor() {
+  constructor(initial?: MobxDemoSnapshot) {
+    this.counter = new CounterStore(initial?.counter);
+    this.todo = new TodoStore(initial?.todo);
+    this.preferences = new PreferencesStore(initial?.preferences);
+
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  getSnapshot(): MobxDemoSnapshot {
+    return {
+      counter: {
+        value: this.counter.value
+      },
+      todo: {
+        items: this.todo.items.map((item) => ({ ...item })),
+        filter: this.todo.filter,
+        nextId: this.todo.nextId
+      },
+      preferences: {
+        theme: this.preferences.theme,
+        density: this.preferences.density,
+        showHints: this.preferences.showHints
+      }
+    };
   }
 
   runCombinedReset() {
