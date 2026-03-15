@@ -1,0 +1,204 @@
+.wrapper {
+  margin-top: 28px;
+  border-top: 1px dashed #bfdbfe;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 23px;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.header p {
+  margin: 8px 0 0;
+  color: #334155;
+  line-height: 1.75;
+}
+
+.blockList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.block {
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 0 0, #e0f2fe 0, transparent 43%),
+    linear-gradient(160deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 8px 28px -22px rgba(2, 132, 199, 0.45);
+}
+
+.blockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.block h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.stepBadge {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%);
+  color: #ecfeff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stepBadgeMuted {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.block p {
+  margin: 8px 0 0;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.bullets {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: #334155;
+  line-height: 1.65;
+}
+
+.codeSurface {
+  margin-top: 12px;
+  border-radius: 14px;
+  border: 1px solid #1e293b;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+}
+
+.codeMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #334155;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.codeTitle {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #bae6fd;
+  font-weight: 700;
+}
+
+.langBadge {
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: #cbd5e1;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.code {
+  margin: 0;
+  padding: 10px 0;
+  background: transparent;
+  color: #e5e7eb;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.code code {
+  display: block;
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: baseline;
+  min-width: max-content;
+  padding: 0 12px;
+}
+
+.codeLine:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.lineNumber {
+  color: #64748b;
+  user-select: none;
+}
+
+.lineContent {
+  white-space: pre;
+}
+
+.code :global(.token-keyword) {
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.code :global(.token-string) {
+  color: #86efac;
+}
+
+.code :global(.token-number) {
+  color: #fda4af;
+}
+
+.code :global(.token-boolean) {
+  color: #f5d0fe;
+}
+
+.code :global(.token-comment) {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.code :global(.token-property) {
+  color: #fde68a;
+}
+
+.code :global(.token-selector) {
+  color: #7dd3fc;
+}
+
+.code :global(.token-command) {
+  color: #fdba74;
+}
+
+.code :global(.token-function) {
+  color: #c4b5fd;
+}
+
+.code :global(.token-tag) {
+  color: #5eead4;
+}

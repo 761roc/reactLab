@@ -4,6 +4,13 @@
   background: #ffffff;
   padding: 24px;
   min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.featureContent {
+  min-height: 220px;
 }
 
 .loading {

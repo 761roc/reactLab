@@ -8,9 +8,10 @@ import { reduxDemoFeature } from '../features/redux-demo';
 import { tailwindDemoFeature } from '../features/tailwind-demo';
 import { valtioDemoFeature } from '../features/valtio-demo';
 import { zustandDemoFeature } from '../features/zustand-demo';
+import { featureGuides } from './feature-guides';
 import type { FeatureModule } from './feature-types';
 
-export const featureRegistry: FeatureModule[] = [
+const features: FeatureModule[] = [
   tailwindDemoFeature,
   responsiveWebDemoFeature,
   reactQueryDemoFeature,
@@ -22,6 +23,11 @@ export const featureRegistry: FeatureModule[] = [
   jotaiDemoFeature,
   valtioDemoFeature
 ];
+
+export const featureRegistry: FeatureModule[] = features.map((feature) => ({
+  ...feature,
+  guide: featureGuides[feature.id]
+}));
 
 export const defaultFeature = featureRegistry[0];
 

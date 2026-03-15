@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { FeatureGuidePanel } from '../common/ui/FeatureGuidePanel';
 import { getFeatureById } from '../core/feature-registry';
 import styles from './FeatureHost.module.css';
 
@@ -23,5 +24,12 @@ export function FeatureHost() {
     </Suspense>
   );
 
-  return <div className={styles.panel}>{feature.withProviders ? feature.withProviders(content) : content}</div>;
+  const entryNode = feature.withProviders ? feature.withProviders(content) : content;
+
+  return (
+    <div className={styles.panel}>
+      <div className={styles.featureContent}>{entryNode}</div>
+      {feature.guide ? <FeatureGuidePanel guide={feature.guide} /> : null}
+    </div>
+  );
 }
