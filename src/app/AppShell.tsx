@@ -1,9 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Navigate, NavLink, Route, Routes, useLocation } from 'react-router-dom';
-import { defaultFeature, featureRegistry } from '../core/feature-registry';
-import type { FeatureCategory } from '../core/feature-types';
-import { FeatureHost } from './FeatureHost';
-import styles from './AppShell.module.css';
+import { useEffect, useMemo, useState } from "react";
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import { defaultFeature, featureRegistry } from "../core/feature-registry";
+import type { FeatureCategory } from "../core/feature-types";
+import { FeatureHost } from "./FeatureHost";
+import styles from "./AppShell.module.css";
 
 function HomeRedirect() {
   return <Navigate to={defaultFeature.routePath} replace />;
@@ -18,26 +24,27 @@ function NotFound() {
   );
 }
 
-const categoryOrder: FeatureCategory[] = ['css', 'react', 'components'];
+const categoryOrder: FeatureCategory[] = ["css", "react", "components"];
 
 const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   css: {
-    title: 'CSS 目录',
-    note: '样式与 UI 库'
+    title: "CSS 目录",
+    note: "样式与 UI 库",
   },
   react: {
-    title: 'React 目录',
-    note: '状态管理与数据流'
+    title: "React 目录",
+    note: "状态管理与数据流",
   },
   components: {
-    title: '组件示例组',
-    note: '可视化组件与节点编排'
-  }
+    title: "组件示例组",
+    note: "可视化组件与节点编排",
+  },
 };
 
 export function AppShell() {
   const location = useLocation();
-  const [expandedCategory, setExpandedCategory] = useState<FeatureCategory | null>(null);
+  const [expandedCategory, setExpandedCategory] =
+    useState<FeatureCategory | null>(null);
 
   const groupedFeatures = useMemo(
     () =>
@@ -45,10 +52,12 @@ export function AppShell() {
         .map((category) => ({
           category,
           ...categoryMeta[category],
-          items: featureRegistry.filter((feature) => feature.category === category)
+          items: featureRegistry.filter(
+            (feature) => feature.category === category,
+          ),
         }))
         .filter((group) => group.items.length > 0),
-    []
+    [],
   );
 
   const activeFeature = useMemo(
@@ -56,9 +65,9 @@ export function AppShell() {
       featureRegistry.find(
         (feature) =>
           location.pathname === feature.routePath ||
-          location.pathname.startsWith(`${feature.routePath}/`)
+          location.pathname.startsWith(`${feature.routePath}/`),
       ),
-    [location.pathname]
+    [location.pathname],
   );
 
   useEffect(() => {
@@ -70,18 +79,20 @@ export function AppShell() {
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
-        <h1 className={styles.brand}>React Feature Lab</h1>
-        <p className={styles.subtitle}>Independent pages for libraries and patterns.</p>
+        <h1 className={styles.brand}>React 功能试验区</h1>
+        <p className={styles.subtitle}>
+          Independent pages for libraries and patterns.
+        </p>
 
         <nav className={styles.nav}>
           {groupedFeatures.map((group) => (
             <section className={styles.navGroup} key={group.category}>
               <button
                 aria-expanded={expandedCategory === group.category}
-                className={`${styles.navGroupToggle} ${expandedCategory === group.category ? styles.navGroupToggleOpen : ''}`}
+                className={`${styles.navGroupToggle} ${expandedCategory === group.category ? styles.navGroupToggleOpen : ""}`}
                 onClick={() =>
                   setExpandedCategory((prev) =>
-                    prev === group.category ? null : group.category
+                    prev === group.category ? null : group.category,
                   )
                 }
                 type="button"
@@ -99,12 +110,12 @@ export function AppShell() {
                     <NavLink
                       key={feature.id}
                       className={({ isActive }) =>
-                        `${styles.navItem} ${isActive ? styles.navItemActive : ''}`
+                        `${styles.navItem} ${isActive ? styles.navItemActive : ""}`
                       }
                       to={feature.routePath}
                     >
                       <strong>{feature.title}</strong>
-                      <span>{feature.tags.join(' / ')}</span>
+                      <span>{feature.tags.join(" / ")}</span>
                     </NavLink>
                   ))}
                 </div>
