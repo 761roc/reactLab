@@ -1,6 +1,7 @@
 import { jotaiDemoFeature } from '../features/jotai-demo';
 import { mobxDemoFeature } from '../features/mobx-demo';
 import { reactContextDemoFeature } from '../features/react-context-demo';
+import { reactFlowDemoFeature } from '../features/reactflow-demo';
 import { reactQueryDemoFeature } from '../features/react-query-demo';
 import { responsiveWebDemoFeature } from '../features/responsive-web-demo';
 import { recoilDemoFeature } from '../features/recoil-demo';
@@ -21,7 +22,8 @@ const features: FeatureModule[] = [
   zustandDemoFeature,
   recoilDemoFeature,
   jotaiDemoFeature,
-  valtioDemoFeature
+  valtioDemoFeature,
+  reactFlowDemoFeature
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({

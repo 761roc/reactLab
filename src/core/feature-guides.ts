@@ -615,5 +615,61 @@ return (
         bullets: ['每个 demo 页维护独立 state 实例', '将远程请求状态交给 React Query 更合适', '高频大对象更新注意拆分结构']
       }
     ]
+  },
+  'reactflow-demo': {
+    heading: 'React Flow Demo 使用概览',
+    description: '节点编排器建议按“初始化节点图 -> 渲染画布 -> 交互修改 -> 导出结构”实现，和 ComfyUI 的工作流心智一致。',
+    blocks: [
+      {
+        title: 'Step 1 · 定义 nodes / edges 初始图',
+        summary: '把节点和连线作为显式状态数据，后续拖拽、连线、新增节点都围绕这两份数据进行。',
+        code: {
+          language: 'ts',
+          title: 'Graph State',
+          snippet: `const initialNodes: Node[] = [...];
+const initialEdges: Edge[] = [...];
+
+const [nodes, setNodes] = useState(initialNodes);
+const [edges, setEdges] = useState(initialEdges);`
+        }
+      },
+      {
+        title: 'Step 2 · 渲染节点画布并区分节点类型',
+        summary: '在真实 React Flow 项目中，先用 `<ReactFlow />` 承载 nodes/edges，再按 node type 映射自定义节点组件。',
+        code: {
+          language: 'tsx',
+          title: 'React Flow Basic Canvas',
+          snippet: `import ReactFlow, { Background, Controls } from '@xyflow/react';
+
+<ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView>
+  <Background gap={20} size={1} />
+  <Controls />
+</ReactFlow>;`
+        }
+      },
+      {
+        title: 'Step 3 · 接入拖拽和连线模式',
+        summary: '拖拽更新节点坐标，连线模式下选取 source/target 追加 edge，形成完整工作流交互闭环。',
+        code: {
+          language: 'tsx',
+          title: 'Drag + Connect',
+          snippet: `function onConnect(connection: Connection) {
+  setEdges((prev) =>
+    addEdge({ ...connection, id: \`edge-\${edgeIdRef.current++}\`, animated: true }, prev)
+  );
+}`
+        }
+      },
+      {
+        title: 'Step 4 · 用模板快速扩展节点图',
+        summary: '提供节点模板面板，让使用者快速追加 Control/Output 节点，并自动连接到当前节点。',
+        bullets: ['新增节点时自动设置初始坐标', '可选自动连边减少重复操作', '保留重置和自动排版按钮']
+      },
+      {
+        title: 'Step 5 · 输出调试信息与结构摘要',
+        summary: '在 Inspector 里显示当前节点信息和图指标，便于学习调试复杂工作流。',
+        bullets: ['节点数 / 边数 / 类型分布统计', '选中节点元数据展示', '可扩展为 JSON 导出/导入']
+      }
+    ]
   }
 };
