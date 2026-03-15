@@ -13,6 +13,7 @@ export const zustandDemoFeature: FeatureModule = {
   id: 'zustand-demo',
   title: 'Zustand Demo',
   routePath: '/features/zustand-demo',
+  category: 'react',
   tags: ['State', 'Zustand'],
   description: 'Feature-local Zustand store with selector-driven UI blocks.',
   EntryComponent: ZustandDemoPage,

@@ -13,6 +13,7 @@ export const reactQueryDemoFeature: FeatureModule = {
   id: 'react-query-demo',
   title: 'React Query Demo',
   routePath: '/features/react-query-demo',
+  category: 'react',
   tags: ['Server State', 'React Query'],
   description: 'Scenario-driven React Query demos for remote data workflows.',
   EntryComponent: ReactQueryDemoPage,

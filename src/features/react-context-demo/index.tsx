@@ -13,6 +13,7 @@ export const reactContextDemoFeature: FeatureModule = {
   id: 'react-context-demo',
   title: 'React Context Demo',
   routePath: '/features/react-context-demo',
+  category: 'react',
   tags: ['State', 'React Context'],
   description: 'Feature-local React Context + useReducer state management demo blocks.',
   EntryComponent: ReactContextDemoPage,

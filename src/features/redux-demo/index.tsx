@@ -13,6 +13,7 @@ export const reduxDemoFeature: FeatureModule = {
   id: 'redux-demo',
   title: 'Redux Demo',
   routePath: '/features/redux-demo',
+  category: 'react',
   tags: ['State', 'Redux Toolkit'],
   description: 'Feature-local Redux store and state updates.',
   EntryComponent: ReduxDemoPage,

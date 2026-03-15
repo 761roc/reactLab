@@ -13,6 +13,7 @@ export const recoilDemoFeature: FeatureModule = {
   id: 'recoil-demo',
   title: 'Recoil Demo',
   routePath: '/features/recoil-demo',
+  category: 'react',
   tags: ['State', 'Recoil'],
   description: 'Feature-local Recoil atoms/selectors with block-based demos.',
   EntryComponent: RecoilDemoPage,

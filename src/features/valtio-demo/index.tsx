@@ -13,6 +13,7 @@ export const valtioDemoFeature: FeatureModule = {
   id: 'valtio-demo',
   title: 'Valtio Demo',
   routePath: '/features/valtio-demo',
+  category: 'react',
   tags: ['State', 'Valtio'],
   description: 'Feature-local Valtio proxy state with block-based demos.',
   EntryComponent: ValtioDemoPage,

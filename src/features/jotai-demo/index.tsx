@@ -13,6 +13,7 @@ export const jotaiDemoFeature: FeatureModule = {
   id: 'jotai-demo',
   title: 'Jotai Demo',
   routePath: '/features/jotai-demo',
+  category: 'react',
   tags: ['State', 'Jotai'],
   description: 'Feature-local Jotai atoms with block-based learning demos.',
   EntryComponent: JotaiDemoPage,
