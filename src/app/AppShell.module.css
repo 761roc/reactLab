@@ -1,7 +1,15 @@
 .layout {
+  --sidebar-width-expanded: 320px;
+  --sidebar-width-collapsed: 46px;
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
+  grid-template-columns: var(--sidebar-width-expanded) minmax(0, 1fr);
   min-height: 100dvh;
+  position: relative;
+  transition: grid-template-columns 220ms ease;
+}
+
+.layoutSidebarCollapsed {
+  grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr);
 }
 
 .sidebar {
@@ -9,14 +17,132 @@
   background:
     radial-gradient(circle at 16% 8%, rgba(34, 211, 238, 0.16) 0%, transparent 45%),
     linear-gradient(180deg, #f5fbff 0%, #f8fafc 38%, #ffffff 100%);
-  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: stretch;
   position: sticky;
   top: 0;
   height: 100dvh;
+  overflow: hidden;
+  transition:
+    width 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.sidebarExpanded {
+  width: var(--sidebar-width-expanded);
+}
+
+.sidebarCollapsed {
+  width: var(--sidebar-width-collapsed);
+}
+
+.sidebarPanel {
+  padding: 24px 20px;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 16px;
   overflow-y: auto;
+  transition:
+    opacity 160ms ease,
+    transform 180ms ease;
+}
+
+.sidebarFooter {
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(203, 213, 225, 0.86);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+.sidebarExpanded .sidebarPanel {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.sidebarCollapsed .sidebarPanel {
+  opacity: 0;
+  transform: translateX(-16px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sidebarCollapsed .sidebarFooter {
+  padding: 8px;
+}
+
+.sidebarHandle {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 10px 12px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 18px 38px -30px rgba(15, 23, 42, 0.8);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.sidebarHandle:hover {
+  border-color: #0891b2;
+  box-shadow: 0 20px 44px -28px rgba(8, 145, 178, 0.65);
+  transform: translateY(-1px);
+}
+
+.sidebarHandle:focus-visible {
+  outline: 2px solid #0891b2;
+  outline-offset: 2px;
+}
+
+.sidebarCollapsed .sidebarHandle {
+  min-height: 36px;
+  padding: 10px 0;
+  border-radius: 0;
+  gap: 0;
+  background: #ffffff;
+}
+
+.sidebarHandleIcon {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.sidebarHandleText {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.sidebarCollapsed .sidebarHandleText {
+  display: none;
+}
+
+.sidebarBackdrop {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(15, 23, 42, 0.22);
+  backdrop-filter: blur(2px);
+  z-index: 20;
 }
 
 .brand {
@@ -168,6 +294,68 @@
 .content {
   padding: 28px;
   background: radial-gradient(circle at top right, #ecfeff 0%, #ffffff 38%);
+  min-width: 0;
+}
+
+.mobileTopbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  border: 1px solid rgba(203, 213, 225, 0.88);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 22px 36px -34px rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.mobileMenuButton {
+  appearance: none;
+  border: 1px solid rgba(8, 145, 178, 0.26);
+  background: linear-gradient(180deg, #ffffff 0%, #ecfeff 100%);
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 18px 30px -28px rgba(8, 145, 178, 0.7);
+}
+
+.mobileMenuButton:focus-visible {
+  outline: 2px solid #0891b2;
+  outline-offset: 2px;
+}
+
+.mobileMenuIcon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.mobileTopbarMeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobileTopbarMeta strong {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.mobileTopbarMeta span {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .notFound {
@@ -182,10 +370,78 @@
     grid-template-columns: 1fr;
   }
 
+  .layoutCompact {
+    min-height: 100dvh;
+  }
+
   .sidebar {
-    position: static;
+    position: fixed;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
     height: auto;
-    border-right: 0;
-    border-bottom: 1px solid #e2e8f0;
+    width: min(320px, calc(100vw - 24px));
+    border: 1px solid rgba(203, 213, 225, 0.92);
+    border-right: 1px solid rgba(203, 213, 225, 0.92);
+    border-radius: 22px;
+    box-shadow: 0 26px 70px -40px rgba(15, 23, 42, 0.85);
+    z-index: 24;
+  }
+
+  .sidebarCompact {
+    transform: translateX(-104%);
+  }
+
+  .sidebarCompact.sidebarExpanded {
+    left: 12px;
+    width: min(320px, calc(100vw - 24px));
+    transform: translateX(0);
+  }
+
+  .sidebarCompact.sidebarCollapsed {
+    pointer-events: none;
+  }
+
+  .sidebarCompact .sidebarPanel {
+    padding: 28px 18px 20px 18px;
+  }
+
+  .sidebarCompact .sidebarFooter {
+    padding: 12px 18px 18px;
+  }
+
+  .sidebarCompact.sidebarCollapsed .sidebarHandle {
+    border-radius: 14px;
+  }
+
+  .sidebarCompact.sidebarCollapsed .sidebarHandleText {
+    display: inline;
+  }
+
+  .contentCompact {
+    padding: 20px 16px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contentCompact {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .sidebarCompact.sidebarExpanded {
+    width: min(320px, calc(100vw - 16px));
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+  }
+
+  .mobileTopbar {
+    align-items: flex-start;
+  }
+
+  .mobileTopbarMeta span {
+    white-space: normal;
   }
 }
