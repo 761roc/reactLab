@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.button,
+.primaryButton,
+.dangerButton {
+  border: 1px solid var(--ne-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ne-text);
+  background: var(--ne-surface);
+  transition: transform 140ms ease-out, background 140ms ease-out,
+    border-color 140ms ease-out;
+}
+
+.primaryButton {
+  background: var(--ne-primary);
+  border-color: var(--ne-primary);
+  color: #ffffff;
+}
+
+.dangerButton {
+  background: var(--ne-danger-weak);
+  border-color: rgba(220, 38, 38, 0.55);
+  color: var(--ne-danger);
+}
+
+.button:hover,
+.primaryButton:hover,
+.dangerButton:hover {
+  transform: translateY(-1px);
+  background: var(--ne-surface-muted);
+  border-color: var(--ne-border-strong);
+}
+
+.primaryButton:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.dangerButton:hover {
+  background: #fecaca;
+  border-color: rgba(220, 38, 38, 0.7);
+}
+
+.button:disabled,
+.primaryButton:disabled,
+.dangerButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:focus-visible,
+.primaryButton:focus-visible,
+.dangerButton:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.22);
+  outline-offset: 2px;
+}
+
+.fileLabel {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.fileLabel input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.status {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ne-muted);
+}

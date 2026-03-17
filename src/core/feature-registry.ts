@@ -4,6 +4,7 @@ import { reactContextDemoFeature } from '../features/react-context-demo';
 import { reactFlowDemoFeature } from '../features/reactflow-demo';
 import { reactFlowJsonFlowFeature } from '../features/reactflow-json-flow';
 import { reactQueryDemoFeature } from '../features/react-query-demo';
+import { notionEditorFeature } from '../features/notion-editor';
 import { responsiveWebDemoFeature } from '../features/responsive-web-demo';
 import { recoilDemoFeature } from '../features/recoil-demo';
 import { reduxDemoFeature } from '../features/redux-demo';
@@ -24,6 +25,7 @@ const features: FeatureModule[] = [
   recoilDemoFeature,
   jotaiDemoFeature,
   valtioDemoFeature,
+  notionEditorFeature,
   reactFlowDemoFeature,
   reactFlowJsonFlowFeature
 ];

@@ -1,0 +1,255 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 38%);
+  --ne-text: #0f172a;
+  --ne-muted: #475569;
+  --ne-muted2: #64748b;
+  --ne-border: #e2e8f0;
+  --ne-border-strong: #cbd5e1;
+  --ne-surface: #ffffff;
+  --ne-surface-muted: #f1f5f9;
+  --ne-primary: #2563eb;
+  --ne-primary-weak: #dbeafe;
+  --ne-danger: #dc2626;
+  --ne-danger-weak: #fee2e2;
+  --ne-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ne-text);
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ne-muted);
+}
+
+.editorContainer {
+  display: flex;
+  width: 100%;
+}
+
+.editorShell {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  border-radius: 16px;
+  border: 1px solid var(--ne-border);
+  background: var(--ne-surface);
+  box-shadow: var(--ne-shadow);
+  padding: 40px 60px;
+  overflow: visible;
+}
+
+.prose {
+  outline: none;
+  color: var(--ne-text);
+  font-size: 16px;
+  line-height: 1.7;
+  caret-color: var(--ne-text);
+  min-height: 60vh;
+}
+
+.editorShell :global(.ProseMirror-focused) {
+  outline: none;
+}
+
+.editorShell :global(.ProseMirror p) {
+  margin: 10px 0;
+}
+
+.editorShell :global(.ProseMirror) ::selection {
+  background: rgba(37, 99, 235, 0.24);
+}
+
+.editorShell :global(.ProseMirror h1) {
+  margin: 24px 0 12px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.editorShell :global(.ProseMirror h2) {
+  margin: 20px 0 12px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.editorShell :global(.ProseMirror h3) {
+  margin: 16px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.editorShell :global(.ProseMirror ul),
+.editorShell :global(.ProseMirror ol) {
+  margin: 10px 0;
+  padding-left: 26px;
+  list-style-position: outside;
+}
+
+.editorShell :global(.ProseMirror ul:not([data-type='taskList'])) {
+  list-style-type: disc;
+}
+
+.editorShell :global(.ProseMirror ol) {
+  list-style-type: decimal;
+}
+
+.editorShell :global(.ProseMirror ul:not([data-type='taskList']) li),
+.editorShell :global(.ProseMirror ol li) {
+  display: list-item;
+}
+
+.editorShell :global(.ProseMirror blockquote) {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-left: 3px solid rgba(37, 99, 235, 0.72);
+  background: #eff6ff;
+  border-radius: 12px;
+}
+
+.editorShell :global(.ProseMirror code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--ne-surface-muted);
+  border: 1px solid var(--ne-border);
+  color: #d946ef;
+}
+
+.editorShell :global(.ProseMirror pre) {
+  margin: 12px 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #0b1220;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: rgba(226, 232, 240, 0.98);
+  overflow: auto;
+}
+
+.editorShell :global(.ProseMirror pre code) {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: inherit;
+}
+
+.editorShell :global(.ProseMirror hr) {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid var(--ne-border);
+}
+
+.editorShell :global(.ProseMirror .is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--ne-muted2);
+  pointer-events: none;
+  height: 0;
+}
+
+.editorShell :global(.ProseMirror ul[data-type='taskList']) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem']) {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 4px 0;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > div > p) {
+  margin: 0;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > label) {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 22px;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > label > span) {
+  display: none;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > label > input[type='checkbox']) {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(100, 116, 139, 0.75);
+  background: #ffffff;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  cursor: pointer;
+  transition: background 120ms ease-out, border-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > label > input[type='checkbox']::before) {
+  content: '';
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: rotate(-45deg) translateY(-1px);
+  opacity: 0;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'][data-checked='true'] > label > input[type='checkbox']) {
+  background: var(--ne-primary);
+  border-color: var(--ne-primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'][data-checked='true'] > label > input[type='checkbox']::before) {
+  opacity: 1;
+}
+
+.editorShell :global(.ProseMirror li[data-type='taskItem'] > div) {
+  flex: 1;
+}
+
+:global(.tippy-box[data-theme~='notion-command']) {
+  background: transparent;
+  box-shadow: none;
+}
+
+:global(.tippy-box[data-theme~='notion-command'] .tippy-content) {
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .editorShell {
+    padding: 20px;
+    min-height: 50vh;
+  }
+}

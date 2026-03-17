@@ -1,0 +1,52 @@
+.items {
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--ne-surface, #ffffff);
+  color: var(--ne-text, #0f172a);
+  box-shadow: var(--ne-shadow, 0 18px 44px rgba(15, 23, 42, 0.14));
+  border: 1px solid var(--ne-border, #e2e8f0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.item:hover,
+.isSelected {
+  background: var(--ne-surface-muted, #f1f5f9);
+  border-color: var(--ne-border, #e2e8f0);
+}
+
+.itemTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ne-text, #0f172a);
+}
+
+.itemDescription {
+  font-size: 12px;
+  color: var(--ne-muted, #475569);
+}
+
+.empty {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--ne-muted, #475569);
+  text-align: center;
+}
