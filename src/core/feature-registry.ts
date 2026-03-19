@@ -1,3 +1,4 @@
+import { closureThisSummaryFeature } from "../features/closure-this-summary";
 import { designPatternsFeature } from "../features/design-patterns";
 import { jotaiDemoFeature } from "../features/jotai-demo";
 import { mobxDemoFeature } from "../features/mobx-demo";
@@ -32,6 +33,7 @@ const features: FeatureModule[] = [
   reactFlowDemoFeature,
   reactFlowJsonFlowFeature,
   designPatternsFeature,
+  closureThisSummaryFeature,
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({

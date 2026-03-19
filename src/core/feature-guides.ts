@@ -155,6 +155,38 @@ await strategy.execute(file);`
       }
     ]
   },
+  'closure-this-summary': {
+    heading: '闭包与 this 总结页使用概览',
+    description: '这页把前端里最常见的闭包和 this 指向问题，统一整理成“题目 -> 答案 -> 解读 -> 代码”的形式。',
+    blocks: [
+      {
+        title: 'Step 1 · 先区分两个底层模型',
+        summary: '闭包关注的是词法作用域与变量持有；this 关注的是调用方式与执行上下文。',
+        bullets: ['闭包：谁被引用了，谁就可能被保留', 'this：谁调用了函数，谁更可能成为 this']
+      },
+      {
+        title: 'Step 2 · 闭包问题常见在循环、监听器、异步回调',
+        summary: '当你看到 for 循环、setTimeout、事件监听、effect 回调时，要先想“这里会不会引用到旧变量或保留大对象”。',
+        code: {
+          language: 'js',
+          title: 'Loop + Closure',
+          snippet: `for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}`
+        }
+      },
+      {
+        title: 'Step 3 · this 问题常见在方法脱离对象调用',
+        summary: '方法作为回调传出去、赋值给变量、交给事件系统后，最容易出现 this 丢失。',
+        code: {
+          language: 'js',
+          title: 'Method Reference',
+          snippet: `const fn = user.speak;
+fn(); // this 不再是 user`
+        }
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',

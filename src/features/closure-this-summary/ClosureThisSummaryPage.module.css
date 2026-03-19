@@ -1,0 +1,263 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dbeafe;
+  border-radius: 26px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 28%),
+    radial-gradient(circle at 82% 14%, rgba(251, 191, 36, 0.14), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 28px 96px -72px rgba(15, 23, 42, 0.9);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid #bae6fd;
+  background: #ecfeff;
+  color: #0f766e;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h2 {
+  margin: 16px 0 0;
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  color: #0f172a;
+}
+
+.heroLead {
+  max-width: 76ch;
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #334155;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.heroCard,
+.questionCard,
+.pitfallCard,
+.ruleCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 16px;
+}
+
+.heroCard strong,
+.questionCard strong,
+.pitfallCard strong,
+.ruleCard strong {
+  display: block;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.heroCard p,
+.questionCard p,
+.pitfallCard p,
+.ruleCard p {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.heroStat {
+  font-size: 28px;
+  letter-spacing: -0.05em;
+}
+
+.columns {
+  column-count: 2;
+  column-gap: 12px;
+  margin-top: 4px;
+}
+
+.questionCard,
+.pitfallCard {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+
+.labelRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  color: #1e40af;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.answerBox,
+.explainBox {
+  margin-top: 12px;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.answerBox {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+}
+
+.explainBox {
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+}
+
+.answerBox span,
+.explainBox span {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.answerBox p,
+.explainBox p {
+  margin: 8px 0 0;
+}
+
+.codeBlock {
+  margin-top: 14px;
+  border-radius: 16px;
+  border: 1px solid #dbe4ef;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow: auto;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.codePre {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.75;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
+}
+
+.codeLine:hover {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.lineNumber {
+  display: inline-flex;
+  justify-content: flex-end;
+  padding: 0 10px 0 0;
+  color: #64748b;
+  user-select: none;
+  border-right: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.lineContent {
+  display: block;
+  padding: 0 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tokenKeyword {
+  color: #c084fc;
+}
+
+.tokenBoolean {
+  color: #f472b6;
+}
+
+.tokenNumber {
+  color: #fbbf24;
+}
+
+.tokenFunction {
+  color: #38bdf8;
+}
+
+.tokenTag {
+  color: #22c55e;
+}
+
+.tokenString {
+  color: #86efac;
+}
+
+.tokenComment {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.rules {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+@media (max-width: 980px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .columns {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 20px;
+    border-radius: 22px;
+  }
+}
