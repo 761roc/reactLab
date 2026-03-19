@@ -110,6 +110,51 @@ export const featureGuides: Partial<Record<string, FeatureGuide>> = {
       }
     ]
   },
+  'design-patterns': {
+    heading: '设计模式页使用概览',
+    description: '这页把前端里最常见的设计模式按“问题域 -> 适用场景 -> 实际案例”整理，适合做开发前选型参考。',
+    blocks: [
+      {
+        title: 'Step 1 · 先按问题域归类，不要直接背术语',
+        summary: 'React 场景下，最常见的问题不是“我要不要用某个 GoF 名字”，而是“我要解决组合、状态还是集成问题”。',
+        bullets: ['组合问题：Compound / Controlled / Headless', '状态问题：Provider / Hook / Reducer / Container', '集成问题：Adapter / Strategy / Facade']
+      },
+      {
+        title: 'Step 2 · 模式必须绑定真实变化点',
+        summary: '没有变化点时，模式只会增加抽象层；有明显变化点时，模式才会真正降低复杂度。',
+        code: {
+          language: 'tsx',
+          title: 'Strategy Selection',
+          snippet: `const strategy = file.size > LARGE_LIMIT
+  ? multipartUploadStrategy
+  : directUploadStrategy;
+
+await strategy.execute(file);`
+        }
+      },
+      {
+        title: 'Step 3 · 前端模式通常是组合使用',
+        summary: '真实页面里经常不是单独出现一个模式，而是容器组件 + 自定义 Hook + 组合组件一起出现。',
+        code: {
+          language: 'tsx',
+          title: 'Container + Presentational',
+          snippet: `function OrdersPageContainer() {
+  const query = useOrdersQuery();
+  const [filter, setFilter] = useState("pending");
+
+  return (
+    <OrdersTable
+      rows={query.data ?? []}
+      filter={filter}
+      onFilterChange={setFilter}
+      loading={query.isPending}
+    />
+  );
+}`
+        }
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',

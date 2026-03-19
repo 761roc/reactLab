@@ -26,7 +26,7 @@ function NotFound() {
   );
 }
 
-const categoryOrder: FeatureCategory[] = ["css", "react", "components"];
+const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content"];
 
 const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   css: {
@@ -40,6 +40,10 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   components: {
     title: "组件示例组",
     note: "可视化组件与节点编排",
+  },
+  content: {
+    title: "内容整理",
+    note: "知识梳理与模式归档",
   },
 };
 

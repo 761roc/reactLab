@@ -1,0 +1,379 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dbeafe;
+  border-radius: 26px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(16, 185, 129, 0.12), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 28px 96px -72px rgba(15, 23, 42, 0.9);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h2 {
+  margin: 16px 0 0;
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  color: #0f172a;
+}
+
+.heroLead {
+  max-width: 74ch;
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #334155;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.heroButton,
+.heroGhost {
+  appearance: none;
+  border-radius: 14px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.heroButton {
+  border: 1px solid #0f172a;
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 18px 36px -28px rgba(15, 23, 42, 0.9);
+}
+
+.heroGhost {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.heroButton:hover,
+.heroGhost:hover {
+  transform: translateY(-1px);
+}
+
+.heroMeta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.heroMetaCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 16px;
+}
+
+.heroMetaCard strong {
+  display: block;
+  font-size: 26px;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+}
+
+.heroMetaCard span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.heroMetaCard p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.matrix {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.matrixCard,
+.patternCard,
+.caseCard,
+.antiCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 16px;
+}
+
+.matrixCard strong,
+.patternCard strong,
+.caseCard strong,
+.antiCard strong {
+  display: block;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.matrixCard p,
+.patternCard p,
+.caseCard p,
+.antiCard p {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.patternGrid {
+  column-count: 2;
+  column-gap: 12px;
+  margin-top: 4px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  color: #1e40af;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.patternMeta {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.metaRow {
+  display: grid;
+  gap: 4px;
+}
+
+.metaRow span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.metaRow p {
+  margin: 0;
+}
+
+.codeBlock {
+  margin-top: 14px;
+  border-radius: 16px;
+  border: 1px solid #dbe4ef;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow: auto;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.codePre {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.75;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
+}
+
+.codeLine:hover {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.lineNumber {
+  display: inline-flex;
+  justify-content: flex-end;
+  padding: 0 10px 0 0;
+  color: #64748b;
+  user-select: none;
+  border-right: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.lineContent {
+  display: block;
+  padding: 0 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tokenKeyword {
+  color: #c084fc;
+}
+
+.tokenBoolean {
+  color: #f472b6;
+}
+
+.tokenNumber {
+  color: #fbbf24;
+}
+
+.tokenFunction {
+  color: #38bdf8;
+}
+
+.tokenTag {
+  color: #22c55e;
+}
+
+.tokenString {
+  color: #86efac;
+}
+
+.tokenComment {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.caseGrid,
+.antiGrid {
+  column-count: 2;
+  column-gap: 12px;
+  margin-top: 4px;
+}
+
+.patternCard,
+.caseCard,
+.antiCard {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+
+.caseCard ul,
+.antiCard ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.caseMeta {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.caseMetaRow {
+  display: grid;
+  gap: 4px;
+}
+
+.caseMetaRow span {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.caseMetaRow p {
+  margin: 0;
+}
+
+.checklist {
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.checklistItem {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  background: #f8fbff;
+  padding: 14px 16px;
+}
+
+.checklistItem strong {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.checklistItem p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #475569;
+}
+
+@media (max-width: 980px) {
+  .heroMeta,
+  .matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .patternGrid,
+  .caseGrid,
+  .antiGrid {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 20px;
+    border-radius: 22px;
+  }
+}

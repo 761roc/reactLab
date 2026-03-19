@@ -1,3 +1,4 @@
+import { designPatternsFeature } from "../features/design-patterns";
 import { jotaiDemoFeature } from "../features/jotai-demo";
 import { mobxDemoFeature } from "../features/mobx-demo";
 import { reactContextDemoFeature } from "../features/react-context-demo";
@@ -30,6 +31,7 @@ const features: FeatureModule[] = [
   shadcnDemoFeature,
   reactFlowDemoFeature,
   reactFlowJsonFlowFeature,
+  designPatternsFeature,
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({
