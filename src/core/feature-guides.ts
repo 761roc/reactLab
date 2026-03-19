@@ -187,6 +187,42 @@ fn(); // this 不再是 user`
       }
     ]
   },
+  'prototype-chain-summary': {
+    heading: '原型与原型链总结页使用概览',
+    description: '这页把 prototype、实例原型、原型链查找、instanceof、class 语法糖等问题统一放回原型模型里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先区分函数的 prototype 和实例的原型',
+        summary: '构造函数常见的是 `Foo.prototype`；实例常见的是 `Object.getPrototypeOf(foo)`。两者有关联，但不是同一个概念。',
+        bullets: ['函数身上的 prototype：给实例共享方法', '实例身上的原型：决定属性查找路径']
+      },
+      {
+        title: 'Step 2 · 所有原型链题都可以还原成属性查找',
+        summary: '对象自己没有，就去原型上找；原型也没有，就继续向上，直到 null 为止。',
+        code: {
+          language: 'js',
+          title: 'Property Lookup',
+          snippet: `const profile = { name: "Rocm" };
+profile.toString(); // 向上找到 Object.prototype.toString`
+        }
+      },
+      {
+        title: 'Step 3 · class 只是更现代的语法糖',
+        summary: '实例方法本质仍然挂在 prototype 上，继承本质上也还是通过原型链连接。',
+        code: {
+          language: 'js',
+          title: 'Class Prototype',
+          snippet: `class User {
+  speak() {
+    return "hi";
+  }
+}
+
+console.log(User.prototype.speak);`
+        }
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',

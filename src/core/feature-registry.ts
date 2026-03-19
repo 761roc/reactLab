@@ -7,6 +7,7 @@ import { reactFlowDemoFeature } from "../features/reactflow-demo";
 import { reactFlowJsonFlowFeature } from "../features/reactflow-json-flow";
 import { reactQueryDemoFeature } from "../features/react-query-demo";
 import { notionEditorFeature } from "../features/notion-editor";
+import { prototypeChainSummaryFeature } from "../features/prototype-chain-summary";
 import { responsiveWebDemoFeature } from "../features/responsive-web-demo";
 import { recoilDemoFeature } from "../features/recoil-demo";
 import { reduxDemoFeature } from "../features/redux-demo";
@@ -34,6 +35,7 @@ const features: FeatureModule[] = [
   reactFlowJsonFlowFeature,
   designPatternsFeature,
   closureThisSummaryFeature,
+  prototypeChainSummaryFeature,
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({
