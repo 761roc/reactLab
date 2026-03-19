@@ -92,9 +92,13 @@ export const featureGuides: Partial<Record<string, FeatureGuide>> = {
         code: {
           language: 'tsx',
           title: 'Control Panel Pattern',
-          snippet: `<Field label="Project title">
+          snippet: `<label className="grid gap-2">
+  <span className="text-xs font-semibold uppercase tracking-[0.16em]">Project title</span>
   <Input value={projectName} onChange={...} />
-</Field>
+</label>
+<Select value={stackPreset} onValueChange={setStackPreset}>
+  <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+</Select>
 <Switch checked={isLiveMode} onCheckedChange={setIsLiveMode} />
 <Checkbox checked={publishDocs} onCheckedChange={setPublishDocs} />`
         }
