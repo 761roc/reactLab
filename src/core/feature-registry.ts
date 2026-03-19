@@ -1,18 +1,19 @@
-import { jotaiDemoFeature } from '../features/jotai-demo';
-import { mobxDemoFeature } from '../features/mobx-demo';
-import { reactContextDemoFeature } from '../features/react-context-demo';
-import { reactFlowDemoFeature } from '../features/reactflow-demo';
-import { reactFlowJsonFlowFeature } from '../features/reactflow-json-flow';
-import { reactQueryDemoFeature } from '../features/react-query-demo';
-import { notionEditorFeature } from '../features/notion-editor';
-import { responsiveWebDemoFeature } from '../features/responsive-web-demo';
-import { recoilDemoFeature } from '../features/recoil-demo';
-import { reduxDemoFeature } from '../features/redux-demo';
-import { tailwindDemoFeature } from '../features/tailwind-demo';
-import { valtioDemoFeature } from '../features/valtio-demo';
-import { zustandDemoFeature } from '../features/zustand-demo';
-import { featureGuides } from './feature-guides';
-import type { FeatureModule } from './feature-types';
+import { jotaiDemoFeature } from "../features/jotai-demo";
+import { mobxDemoFeature } from "../features/mobx-demo";
+import { reactContextDemoFeature } from "../features/react-context-demo";
+import { reactFlowDemoFeature } from "../features/reactflow-demo";
+import { reactFlowJsonFlowFeature } from "../features/reactflow-json-flow";
+import { reactQueryDemoFeature } from "../features/react-query-demo";
+import { notionEditorFeature } from "../features/notion-editor";
+import { responsiveWebDemoFeature } from "../features/responsive-web-demo";
+import { recoilDemoFeature } from "../features/recoil-demo";
+import { reduxDemoFeature } from "../features/redux-demo";
+import { shadcnDemoFeature } from "../features/shadcn-demo";
+import { tailwindDemoFeature } from "../features/tailwind-demo";
+import { valtioDemoFeature } from "../features/valtio-demo";
+import { zustandDemoFeature } from "../features/zustand-demo";
+import { featureGuides } from "./feature-guides";
+import type { FeatureModule } from "./feature-types";
 
 const features: FeatureModule[] = [
   tailwindDemoFeature,
@@ -26,13 +27,14 @@ const features: FeatureModule[] = [
   jotaiDemoFeature,
   valtioDemoFeature,
   notionEditorFeature,
+  shadcnDemoFeature,
   reactFlowDemoFeature,
-  reactFlowJsonFlowFeature
+  reactFlowJsonFlowFeature,
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({
   ...feature,
-  guide: featureGuides[feature.id]
+  guide: featureGuides[feature.id],
 }));
 
 export const defaultFeature = featureRegistry[0];

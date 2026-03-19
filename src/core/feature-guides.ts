@@ -58,6 +58,54 @@ export const featureGuides: Partial<Record<string, FeatureGuide>> = {
       }
     ]
   },
+  'shadcn-demo': {
+    heading: 'shadcn/ui Demo 使用概览',
+    description: '这个页面重点不在单个组件孤立展示，而在于用 shadcn/ui 的拼装思路构建一个两屏以上的复杂工作台页面。',
+    blocks: [
+      {
+        title: 'Step 1 · 先用 Card / Badge / Button 建首屏骨架',
+        summary: 'shadcn/ui 常见页面会先搭表面层、标题层级和主次动作，再把数据卡片和状态标签填进去。',
+        code: {
+          language: 'tsx',
+          title: 'Hero Composition',
+          snippet: `<Card>
+  <CardHeader>
+    <Badge>Workspace Status</Badge>
+    <CardTitle>Registry preview orchestration</CardTitle>
+    <CardDescription>把组件串成真实页面，而不是孤立样式。</CardDescription>
+  </CardHeader>
+  <CardFooter>
+    <Button>Promote Preview</Button>
+    <Button variant="secondary">Sync Tokens</Button>
+  </CardFooter>
+</Card>`
+        }
+      },
+      {
+        title: 'Step 2 · 用 Tabs 在单页里切多个信息视图',
+        summary: 'Tabs 适合在不离开当前页面上下文的前提下，切换 overview、pipeline、activity 之类的内容面板。',
+        bullets: ['不需要新路由即可切内容区', '保持顶部统计和操作栏可见', '适合长页中的中段内容切换']
+      },
+      {
+        title: 'Step 3 · 配置面板中组合 Input / Textarea / Switch / Checkbox',
+        summary: 'shadcn/ui 很适合拼密集但清晰的表单面板，关键是 label、hint、间距和边框语义统一。',
+        code: {
+          language: 'tsx',
+          title: 'Control Panel Pattern',
+          snippet: `<Field label="Project title">
+  <Input value={projectName} onChange={...} />
+</Field>
+<Switch checked={isLiveMode} onCheckedChange={setIsLiveMode} />
+<Checkbox checked={publishDocs} onCheckedChange={setPublishDocs} />`
+        }
+      },
+      {
+        title: 'Step 4 · 在第二屏安排表格和行级操作',
+        summary: '为了证明组件库能支撑真实后台场景，必须把 table、badge、progress 和 row actions 放进同一个密集区。',
+        bullets: ['表格要保持列层级清晰', '状态用 badge，进度用 progress', '行操作只保留最常用的 1-2 个']
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',
