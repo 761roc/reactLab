@@ -10,6 +10,7 @@ export type FeatureCategory =
   | 'engineering'
   | 'scenario'
   | 'reactInterview'
+  | 'reactMechanism'
   | 'vueInterview'
   | 'interviewHistory';
 

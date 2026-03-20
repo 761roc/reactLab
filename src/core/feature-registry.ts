@@ -40,12 +40,20 @@ import { reactContextDemoFeature } from "../features/react-context-demo";
 import { reactConcurrencySummaryFeature } from "../features/react-concurrency-summary";
 import { reactCoreHooksSummaryFeature } from "../features/react-core-hooks-summary";
 import { reactCustomHookSummaryFeature } from "../features/react-custom-hook-summary";
+import { reactMechanismDiffKeyFeature } from "../features/react-mechanism-diff-key";
 import { reactEffectLifecycleSummaryFeature } from "../features/react-effect-lifecycle-summary";
+import { reactMechanismEffectLayoutFeature } from "../features/react-mechanism-effect-vs-layout-effect";
 import { reactFlowDemoFeature } from "../features/reactflow-demo";
 import { reactFlowJsonFlowFeature } from "../features/reactflow-json-flow";
+import { reactMechanismHooksTopLevelFeature } from "../features/react-mechanism-hooks-top-level";
+import { reactMechanismLargeListFeature } from "../features/react-mechanism-large-list-optimization";
+import { reactMechanismMemoFamilyFeature } from "../features/react-mechanism-memo-family";
 import { reactPerformanceSummaryFeature } from "../features/react-performance-summary";
 import { reactQueryDemoFeature } from "../features/react-query-demo";
+import { reactMechanismRenderOrderFeature } from "../features/react-mechanism-render-order";
 import { reactRenderingMechanicsSummaryFeature } from "../features/react-rendering-mechanics-summary";
+import { reactMechanismRouteStateFeature } from "../features/react-mechanism-route-state-preservation";
+import { reactMechanismSetStateFlowFeature } from "../features/react-mechanism-setstate-flow";
 import { reactStateCommunicationSummaryFeature } from "../features/react-state-communication-summary";
 import { notionEditorFeature } from "../features/notion-editor";
 import { packageManagerSummaryFeature } from "../features/package-manager-summary";
@@ -118,6 +126,14 @@ const features: FeatureModule[] = [
   reactConcurrencySummaryFeature,
   reactCustomHookSummaryFeature,
   reactPerformanceSummaryFeature,
+  reactMechanismSetStateFlowFeature,
+  reactMechanismHooksTopLevelFeature,
+  reactMechanismDiffKeyFeature,
+  reactMechanismEffectLayoutFeature,
+  reactMechanismRenderOrderFeature,
+  reactMechanismMemoFamilyFeature,
+  reactMechanismRouteStateFeature,
+  reactMechanismLargeListFeature,
   interviewHistoryZhongkeyunshengUseStateFeature,
   interviewHistoryZhongkeyunshengInterfaceTypeFeature,
   interviewHistoryZhongkeyunshengGenericsFeature,

@@ -26,7 +26,19 @@ function NotFound() {
   );
 }
 
-const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content", "browser", "engineering", "scenario", "reactInterview", "vueInterview", "interviewHistory"];
+const categoryOrder: FeatureCategory[] = [
+  "css",
+  "react",
+  "components",
+  "content",
+  "browser",
+  "engineering",
+  "scenario",
+  "reactInterview",
+  "reactMechanism",
+  "vueInterview",
+  "interviewHistory",
+];
 
 const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   css: {
@@ -60,6 +72,10 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   reactInterview: {
     title: "React面试",
     note: "状态、Hooks、渲染与性能",
+  },
+  reactMechanism: {
+    title: "面试-React机制",
+    note: "更新、调和、Hooks 与渲染流程",
   },
   vueInterview: {
     title: "VUE",
@@ -114,10 +130,12 @@ export function AppShell() {
             category,
             ...categoryMeta[category],
             directItems,
-            sections: Array.from(sectionMap.entries()).map(([title, sectionItems]) => ({
-              title,
-              items: sectionItems,
-            })),
+            sections: Array.from(sectionMap.entries()).map(
+              ([title, sectionItems]) => ({
+                title,
+                items: sectionItems,
+              }),
+            ),
             items,
           };
         })
@@ -150,7 +168,9 @@ export function AppShell() {
     }
 
     const mediaQuery = window.matchMedia(compactViewportQuery);
-    const updateViewportMode = (event: MediaQueryList | MediaQueryListEvent) => {
+    const updateViewportMode = (
+      event: MediaQueryList | MediaQueryListEvent,
+    ) => {
       const matches = "matches" in event ? event.matches : mediaQuery.matches;
 
       setIsCompactViewport(matches);
@@ -310,7 +330,13 @@ export function AppShell() {
           <button
             aria-controls="app-shell-sidebar"
             aria-expanded={isSidebarExpanded}
-            aria-label={isCompactViewport ? "关闭侧边导航" : isSidebarExpanded ? "收起侧边导航" : "展开侧边导航"}
+            aria-label={
+              isCompactViewport
+                ? "关闭侧边导航"
+                : isSidebarExpanded
+                  ? "收起侧边导航"
+                  : "展开侧边导航"
+            }
             className={styles.sidebarHandle}
             onClick={toggleSidebar}
             type="button"

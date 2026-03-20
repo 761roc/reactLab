@@ -37,6 +37,7 @@ type InterviewEditorialPageProps = {
   interviewTips: readonly string[];
   mistakes: readonly string[];
   comparisonTable?: EditorialComparisonTable;
+  singleColumn?: boolean;
 };
 
 function CodeFrame({ title, code }: { title: string; code: string }) {
@@ -70,6 +71,7 @@ export function InterviewEditorialPage({
   interviewTips,
   mistakes,
   comparisonTable,
+  singleColumn,
 }: InterviewEditorialPageProps) {
   return (
     <div className={styles.page}>
@@ -167,7 +169,9 @@ export function InterviewEditorialPage({
                   <span>{String(index + 1).padStart(2, '0')}</span>
                   <h3>{section.title}</h3>
                 </div>
-                <div className={styles.storyCopy}>
+                <div
+                  className={`${styles.storyCopy} ${singleColumn ? styles.storyCopySingleColumn : ''}`}
+                >
                   {section.paragraphs.map((paragraph, paragraphIndex) => (
                     <p
                       className={paragraphIndex === 0 ? styles.openingParagraph : undefined}

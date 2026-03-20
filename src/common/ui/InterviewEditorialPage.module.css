@@ -337,6 +337,10 @@
   column-gap: 22px;
 }
 
+.storyCopySingleColumn {
+  column-count: 1;
+}
+
 .storyCopy p {
   margin: 0 0 14px;
   font-size: 16px;
