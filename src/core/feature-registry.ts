@@ -24,9 +24,16 @@ import { mobxDemoFeature } from "../features/mobx-demo";
 import { moduleSystemSummaryFeature } from "../features/module-system-summary";
 import { moduleToolsSummaryFeature } from "../features/module-tools-summary";
 import { reactContextDemoFeature } from "../features/react-context-demo";
+import { reactConcurrencySummaryFeature } from "../features/react-concurrency-summary";
+import { reactCoreHooksSummaryFeature } from "../features/react-core-hooks-summary";
+import { reactCustomHookSummaryFeature } from "../features/react-custom-hook-summary";
+import { reactEffectLifecycleSummaryFeature } from "../features/react-effect-lifecycle-summary";
 import { reactFlowDemoFeature } from "../features/reactflow-demo";
 import { reactFlowJsonFlowFeature } from "../features/reactflow-json-flow";
+import { reactPerformanceSummaryFeature } from "../features/react-performance-summary";
 import { reactQueryDemoFeature } from "../features/react-query-demo";
+import { reactRenderingMechanicsSummaryFeature } from "../features/react-rendering-mechanics-summary";
+import { reactStateCommunicationSummaryFeature } from "../features/react-state-communication-summary";
 import { notionEditorFeature } from "../features/notion-editor";
 import { packageManagerSummaryFeature } from "../features/package-manager-summary";
 import { prototypeChainSummaryFeature } from "../features/prototype-chain-summary";
@@ -39,6 +46,9 @@ import { treeShakingSummaryFeature } from "../features/tree-shaking-summary";
 import { typescriptInterviewSummaryFeature } from "../features/typescript-interview-summary";
 import { valtioDemoFeature } from "../features/valtio-demo";
 import { viteWebpackSummaryFeature } from "../features/vite-webpack-summary";
+import { vueCommonApiSummaryFeature } from "../features/vue-common-api-summary";
+import { vueCoreConceptsSummaryFeature } from "../features/vue-core-concepts-summary";
+import { vueInterviewTopicsSummaryFeature } from "../features/vue-interview-topics-summary";
 import { whiteScreenDebugScenarioFeature } from "../features/white-screen-debug-scenario";
 import { zustandDemoFeature } from "../features/zustand-demo";
 import { featureGuides } from "./feature-guides";
@@ -88,6 +98,16 @@ const features: FeatureModule[] = [
   componentRefactorScenarioFeature,
   componentLibraryScenarioFeature,
   frontendSystemScenarioFeature,
+  reactStateCommunicationSummaryFeature,
+  reactCoreHooksSummaryFeature,
+  reactEffectLifecycleSummaryFeature,
+  reactRenderingMechanicsSummaryFeature,
+  reactConcurrencySummaryFeature,
+  reactCustomHookSummaryFeature,
+  reactPerformanceSummaryFeature,
+  vueCoreConceptsSummaryFeature,
+  vueCommonApiSummaryFeature,
+  vueInterviewTopicsSummaryFeature,
 ];
 
 export const featureRegistry: FeatureModule[] = features.map((feature) => ({

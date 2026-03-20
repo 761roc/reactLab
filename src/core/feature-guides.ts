@@ -742,6 +742,210 @@ if (inflight.has(key)) return inflight.get(key)`
       }
     ]
   },
+  'react-state-communication-summary': {
+    heading: 'React 状态与通信使用概览',
+    description: '这页把受控/非受控、状态提升、Context 和组件通信放回“单一数据源和共享范围”这条主线里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先定单一数据源',
+        summary: '受控、非受控、状态提升这些选择，本质都在回答“谁来持有状态”。',
+        bullets: ['局部状态', '共享状态', '跨层共享', '更新成本']
+      },
+      {
+        title: 'Step 2 · Context 是跨层共享，不是全能状态管理',
+        summary: '尤其高频复杂状态要警惕更新范围过大。',
+        code: {
+          language: 'tsx',
+          title: 'Context Scope',
+          snippet: `const ThemeContext = createContext<'light' | 'dark'>('light')`
+        }
+      }
+    ]
+  },
+  'react-core-hooks-summary': {
+    heading: 'React Hooks 基础使用概览',
+    description: '这页把 useState、useRef、useMemo、useCallback 按语义边界拆开，重点放在什么时候该用、什么时候别滥用。',
+    blocks: [
+      {
+        title: 'Step 1 · 先按语义分类 Hook',
+        summary: '驱动渲染的 state、不驱动渲染的 ref、缓存值的 memo、缓存函数引用的 callback，不要混。',
+        bullets: ['state', 'ref', 'memo', 'callback']
+      },
+      {
+        title: 'Step 2 · memo / callback 只有在收益明确时才值得上',
+        summary: '中高级面试很看是否存在过度优化。',
+        code: {
+          language: 'tsx',
+          title: 'Stable Callback',
+          snippet: `const handleSelect = useCallback((id: string) => setSelectedId(id), [])`
+        }
+      }
+    ]
+  },
+  'react-effect-lifecycle-summary': {
+    heading: 'React effect 使用概览',
+    description: '这页把 effect 的执行时机、cleanup、依赖数组和 Strict Mode 下的常见问题统一放回副作用模型里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先分清 render 和 effect',
+        summary: 'effect 是 render 之后与外部世界同步的地方，不该拿来装所有逻辑。',
+        bullets: ['after commit', 'side effects only', 'cleanup matters']
+      },
+      {
+        title: 'Step 2 · cleanup 是真实开发高频点',
+        summary: '订阅、请求、定时器、监听都要考虑撤销时机。',
+        code: {
+          language: 'tsx',
+          title: 'Abort in Cleanup',
+          snippet: `return () => controller.abort()`
+        }
+      }
+    ]
+  },
+  'react-rendering-mechanics-summary': {
+    heading: 'React 渲染机制使用概览',
+    description: '这页把 key、render/commit、协调和批量更新放到同一条更新流程里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · key 先看身份，不先看 warning',
+        summary: '列表项身份稳定，状态复用才会正确。',
+        bullets: ['identity', 'state reuse', 'avoid index in reordering lists']
+      },
+      {
+        title: 'Step 2 · render 和 commit 要分开理解',
+        summary: '组件函数重跑不等于 DOM 全量重建。',
+        code: {
+          language: 'ts',
+          title: 'Render Flow',
+          snippet: `state change -> render -> reconcile -> commit`
+        }
+      }
+    ]
+  },
+  'react-concurrency-summary': {
+    heading: 'React 18 并发特性使用概览',
+    description: '这页重点讲优先级和调度，而不是把并发特性误解成多线程。',
+    blocks: [
+      {
+        title: 'Step 1 · 先分 urgent 和 non-urgent',
+        summary: '输入反馈要先响应，重列表和大计算视图可以稍后跟上。',
+        bullets: ['urgent input', 'transition update', 'deferred consumption']
+      },
+      {
+        title: 'Step 2 · transition 是调度优化，不是性能魔法',
+        summary: '重逻辑本身还是要继续优化。',
+        code: {
+          language: 'tsx',
+          title: 'Transition',
+          snippet: `startTransition(() => setRows(filterRows(allRows, nextKeyword)))`
+        }
+      }
+    ]
+  },
+  'react-custom-hook-summary': {
+    heading: '自定义 Hook 设计使用概览',
+    description: '这页把自定义 Hook 放回行为抽象、边界设计和组件分层里理解，而不是只看代码复用。',
+    blocks: [
+      {
+        title: 'Step 1 · 抽 Hook 先找稳定行为单元',
+        summary: '分页、筛选、弹窗、订阅这些都很适合，但不要为了抽象而抽象。',
+        bullets: ['behavior unit', 'state + actions', 'clear boundary']
+      },
+      {
+        title: 'Step 2 · Hook 返回值本身就是 API 设计',
+        summary: '可读性、可扩展性和职责边界都要考虑。',
+        code: {
+          language: 'ts',
+          title: 'Hook Contract',
+          snippet: `type UseModalResult = { open: boolean; show: () => void; hide: () => void }`
+        }
+      }
+    ]
+  },
+  'react-performance-summary': {
+    heading: 'React 性能优化使用概览',
+    description: '这页把 memo、组件拆分、虚拟列表和工程层优化放在一起，强调先量后优和按收益选择手段。',
+    blocks: [
+      {
+        title: 'Step 1 · 性能优化先量瓶颈',
+        summary: '先看渲染、计算、节点数还是资源加载，不要一上来全加 memo。',
+        bullets: ['measure first', 'state boundary', 'stable props', 'virtualization']
+      },
+      {
+        title: 'Step 2 · memo 要配稳定 props 才更有意义',
+        summary: '对象、数组、函数引用不稳定时，memo 收益会很差。',
+        code: {
+          language: 'tsx',
+          title: 'Stable Props',
+          snippet: `const handleOpen = useCallback((id: string) => setOpenId(id), [])`
+        }
+      }
+    ]
+  },
+  'vue-core-concepts-summary': {
+    heading: 'Vue 基础概念使用概览',
+    description: '这页把 Vue 的声明式模板、响应式系统、组件化和生命周期放在同一条主线里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · Vue 基础题先讲“模板 + 响应式”',
+        summary: '这是 Vue 最核心的组合，也是很多后续 API 和机制题的前提。',
+        bullets: ['template', 'reactivity', 'component', 'lifecycle']
+      },
+      {
+        title: 'Step 2 · Composition API 重点答逻辑组织方式',
+        summary: '中大型项目里，它更适合把同类逻辑聚在一起并抽成 composable。',
+        code: {
+          language: 'ts',
+          title: 'Composable',
+          snippet: `export function usePagination() {
+  const page = ref(1)
+  return { page }
+}`
+        }
+      }
+    ]
+  },
+  'vue-common-api-summary': {
+    heading: 'Vue 常用 API 使用概览',
+    description: '这页把 ref、reactive、computed、watch、通信 API 和 nextTick 按职责分类整理，避免答成零散函数清单。',
+    blocks: [
+      {
+        title: 'Step 1 · API 先按职责分',
+        summary: '源状态、派生值、副作用、通信和 DOM 时机，是 Vue 常用 API 最稳的分类方法。',
+        bullets: ['ref/reactive', 'computed', 'watch/watchEffect', 'props/emits/provide/inject', 'nextTick']
+      },
+      {
+        title: 'Step 2 · computed 和 watch 必须重点区分',
+        summary: '一个是派生值，一个是副作用监听，这是高频追问点。',
+        code: {
+          language: 'ts',
+          title: 'Computed',
+          snippet: `const fullName = computed(() => \`\${firstName.value} \${lastName.value}\`)`
+        }
+      }
+    ]
+  },
+  'vue-interview-topics-summary': {
+    heading: 'Vue 高频面试题使用概览',
+    description: '这页把 Vue 面试里最常见的对比题、性能题和通信题放回“身份、时机、依赖、成本”这条答题框架里。',
+    blocks: [
+      {
+        title: 'Step 1 · 高频题先分类',
+        summary: 'key 属于身份题，nextTick 属于时机题，computed/watch 属于依赖题，v-if/v-show 属于成本题。',
+        bullets: ['identity', 'timing', 'dependency', 'cost']
+      },
+      {
+        title: 'Step 2 · 定义之后一定补使用场景',
+        summary: '这会让回答从背书升级成项目经验表达。',
+        code: {
+          language: 'ts',
+          title: 'v-if vs v-show',
+          snippet: `高频切换 -> v-show
+条件较少变化 -> v-if`
+        }
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',

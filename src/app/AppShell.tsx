@@ -26,7 +26,7 @@ function NotFound() {
   );
 }
 
-const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content", "browser", "engineering", "scenario"];
+const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content", "browser", "engineering", "scenario", "reactInterview", "vueInterview"];
 
 const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   css: {
@@ -56,6 +56,14 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   scenario: {
     title: "场景题",
     note: "排查、优化、重构与系统设计",
+  },
+  reactInterview: {
+    title: "React面试",
+    note: "状态、Hooks、渲染与性能",
+  },
+  vueInterview: {
+    title: "VUE",
+    note: "基础概念、API 与高频面试题",
   },
 };
 
