@@ -32,10 +32,14 @@ const categoryOrder: FeatureCategory[] = [
   "components",
   "content",
   "browser",
+  "browserJsInterview",
   "engineering",
+  "engineeringInterview",
+  "architectureInterview",
   "scenario",
   "reactInterview",
   "reactMechanism",
+  "typescriptTypeSystemInterview",
   "vueInterview",
   "interviewHistory",
 ];
@@ -61,9 +65,21 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
     title: "浏览器专题",
     note: "网络、渲染、存储与安全",
   },
+  browserJsInterview: {
+    title: "面试-浏览器 / 异步 / JS 基础类",
+    note: "浏览器、异步、原型、缓存与跨域",
+  },
   engineering: {
     title: "工程化",
     note: "构建、质量、发布与优化",
+  },
+  engineeringInterview: {
+    title: "面试-工程化 / 性能 / 发布类",
+    note: "构建、发布、监控与性能治理",
+  },
+  architectureInterview: {
+    title: "面试-架构 / 场景设计类",
+    note: "平台设计、组件体系、微前端与渲染方案",
   },
   scenario: {
     title: "场景题",
@@ -76,6 +92,10 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   reactMechanism: {
     title: "面试-React机制",
     note: "更新、调和、Hooks 与渲染流程",
+  },
+  typescriptTypeSystemInterview: {
+    title: "面试-TypeScript 类型系统类",
+    note: "类型、推导、工具与设计边界",
   },
   vueInterview: {
     title: "VUE",

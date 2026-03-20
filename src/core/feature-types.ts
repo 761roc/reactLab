@@ -7,10 +7,14 @@ export type FeatureCategory =
   | 'components'
   | 'content'
   | 'browser'
+  | 'browserJsInterview'
+  | 'architectureInterview'
   | 'engineering'
+  | 'engineeringInterview'
   | 'scenario'
   | 'reactInterview'
   | 'reactMechanism'
+  | 'typescriptTypeSystemInterview'
   | 'vueInterview'
   | 'interviewHistory';
 
