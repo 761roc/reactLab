@@ -26,7 +26,7 @@ function NotFound() {
   );
 }
 
-const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content"];
+const categoryOrder: FeatureCategory[] = ["css", "react", "components", "content", "browser", "engineering", "scenario"];
 
 const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
   css: {
@@ -42,8 +42,20 @@ const categoryMeta: Record<FeatureCategory, { title: string; note: string }> = {
     note: "可视化组件与节点编排",
   },
   content: {
-    title: "内容整理",
-    note: "知识梳理与模式归档",
+    title: "JS内容",
+    note: "JavaScript 机制与面试题",
+  },
+  browser: {
+    title: "浏览器专题",
+    note: "网络、渲染、存储与安全",
+  },
+  engineering: {
+    title: "工程化",
+    note: "构建、质量、发布与优化",
+  },
+  scenario: {
+    title: "场景题",
+    note: "排查、优化、重构与系统设计",
   },
 };
 
@@ -65,13 +77,38 @@ export function AppShell() {
   const groupedFeatures = useMemo(
     () =>
       categoryOrder
-        .map((category) => ({
-          category,
-          ...categoryMeta[category],
-          items: featureRegistry.filter(
+        .map((category) => {
+          const items = featureRegistry.filter(
             (feature) => feature.category === category,
-          ),
-        }))
+          );
+          const directItems = items.filter((feature) => !feature.navSection);
+          const sectionMap = new Map<string, typeof items>();
+
+          items
+            .filter((feature) => feature.navSection)
+            .forEach((feature) => {
+              const section = feature.navSection as string;
+              const existing = sectionMap.get(section);
+
+              if (existing) {
+                existing.push(feature);
+                return;
+              }
+
+              sectionMap.set(section, [feature]);
+            });
+
+          return {
+            category,
+            ...categoryMeta[category],
+            directItems,
+            sections: Array.from(sectionMap.entries()).map(([title, sectionItems]) => ({
+              title,
+              items: sectionItems,
+            })),
+            items,
+          };
+        })
         .filter((group) => group.items.length > 0),
     [],
   );
@@ -206,7 +243,7 @@ export function AppShell() {
 
                 {expandedCategory === group.category ? (
                   <div className={styles.navGroupItems}>
-                    {group.items.map((feature) => (
+                    {group.directItems.map((feature) => (
                       <NavLink
                         key={feature.id}
                         className={({ isActive }) =>
@@ -222,6 +259,33 @@ export function AppShell() {
                         <strong>{feature.title}</strong>
                         <span>{feature.tags.join(" / ")}</span>
                       </NavLink>
+                    ))}
+                    {group.sections.map((section) => (
+                      <div className={styles.navSubgroup} key={section.title}>
+                        <div className={styles.navSubgroupHeader}>
+                          <strong>{section.title}</strong>
+                          <span>{section.items.length} 个主题</span>
+                        </div>
+                        <div className={styles.navSubgroupItems}>
+                          {section.items.map((feature) => (
+                            <NavLink
+                              key={feature.id}
+                              className={({ isActive }) =>
+                                `${styles.navItem} ${isActive ? styles.navItemActive : ""}`
+                              }
+                              onClick={() => {
+                                if (isCompactViewport) {
+                                  closeMobileSidebar();
+                                }
+                              }}
+                              to={feature.routePath}
+                            >
+                              <strong>{feature.title}</strong>
+                              <span>{feature.tags.join(" / ")}</span>
+                            </NavLink>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 ) : null}

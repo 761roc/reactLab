@@ -223,6 +223,525 @@ console.log(User.prototype.speak);`
       }
     ]
   },
+  'event-loop-summary': {
+    heading: '事件循环与异步总结页使用概览',
+    description: '这页把调用栈、宏任务、微任务、Promise、async/await 与渲染时机整理成一套统一的事件循环模型。',
+    blocks: [
+      {
+        title: 'Step 1 · 先把同步、微任务、宏任务分开',
+        summary: '绝大多数输出题都先从这一步开始，先找同步代码，再标记每个回调进入哪个队列。',
+        bullets: ['同步代码先执行', '微任务在当前宏任务结束后清空', '宏任务进入下一轮调度']
+      },
+      {
+        title: 'Step 2 · 理解 await 的恢复时机',
+        summary: '`await` 写起来像同步，但恢复执行时机仍然建立在 Promise 微任务之上，所以常常出现在输出顺序题里。',
+        code: {
+          language: 'js',
+          title: 'Await Resume',
+          snippet: `async function run() {
+  console.log("start");
+  await Promise.resolve();
+  console.log("after");
+}`
+        }
+      },
+      {
+        title: 'Step 3 · 把卡顿问题落回主线程占用',
+        summary: '长同步任务和微任务饥饿都会拖住渲染机会，所以事件循环不仅是输出题，也和性能优化强相关。',
+        code: {
+          language: 'js',
+          title: 'Chunk Heavy Work',
+          snippet: `function runChunked(list) {
+  let index = 0;
+  function tick() {
+    const end = Math.min(index + 100, list.length);
+    while (index < end) index += 1;
+    if (index < list.length) setTimeout(tick, 0);
+  }
+  tick();
+}`
+        }
+      }
+    ]
+  },
+  'copy-reference-summary': {
+    heading: '深拷贝、浅拷贝与引用传递使用概览',
+    description: '这页把对象赋值、浅拷贝、深拷贝和函数参数共享传递放在同一个模型里讲清楚，并且加入了运行结果展示。',
+    blocks: [
+      {
+        title: 'Step 1 · 先区分赋值、浅拷贝和深拷贝',
+        summary: '很多题不是“深拷贝写法题”，而是先要判断当前到底有没有创建新对象。',
+        bullets: ['赋值：默认共享同一个对象', '浅拷贝：第一层是新的', '深拷贝：嵌套层也要断开']
+      },
+      {
+        title: 'Step 2 · 传参问题要按共享传递理解',
+        summary: '函数参数拿到的是一份值拷贝；如果这个值恰好是对象引用，就会共享同一个对象本体。',
+        code: {
+          language: 'js',
+          title: 'Pass By Sharing',
+          snippet: `function update(user) {
+  user.name = "Updated";
+  user = { name: "Other" };
+}`
+        }
+      },
+      {
+        title: 'Step 3 · 深拷贝方案必须看数据类型边界',
+        summary: 'JSON 方案适合纯数据对象，`structuredClone` 更适合现代复杂数据，但也并非能处理所有值。',
+        code: {
+          language: 'js',
+          title: 'Structured Clone',
+          snippet: `const cloned = structuredClone(source);
+console.log(cloned.tags === source.tags); // false`
+        }
+      }
+    ]
+  },
+  'browser-url-lifecycle': {
+    heading: '从输入 URL 到页面展示使用概览',
+    description: '这页把地址解析、DNS、连接建立、资源请求和页面渲染放到一条完整链路里讲清楚。',
+    blocks: [
+      { title: 'Step 1 · 先把链路分成网络阶段和渲染阶段', summary: '前半段偏请求和连接，后半段偏解析和页面生成。', bullets: ['URL 解析', 'DNS / TCP / TLS', 'HTML / CSS / JS 渲染'] },
+      { title: 'Step 2 · 流程题最好顺手带上性能视角', summary: '这样回答不会停留在背顺序，而是能自然连到白屏、首屏慢和调试思路。', code: { language: 'js', title: 'Main Flow', snippet: `URL -> DNS -> TCP/TLS -> HTTP -> HTML/CSS/JS -> Render` } },
+    ]
+  },
+  'browser-cache-summary': {
+    heading: '浏览器缓存使用概览',
+    description: '这页把强缓存、协商缓存和常见缓存头用更工程化的方式整理起来。',
+    blocks: [
+      { title: 'Step 1 · 先问有没有发请求', summary: '没发请求偏强缓存，发了再看是不是协商缓存。', bullets: ['强缓存：直接用', '协商缓存：先确认'] },
+      { title: 'Step 2 · 按资源类型答缓存策略', summary: 'HTML、静态资源、接口数据，通常不该用一套缓存策略。', code: { language: 'js', title: 'Strategy', snippet: `HTML -> 保守缓存\nhash 静态资源 -> 长缓存\n接口 -> 看实时性` } },
+    ]
+  },
+  'browser-rendering-summary': {
+    heading: '重排和重绘使用概览',
+    description: '这页把 layout 和 paint 的区别、成本和性能影响放到同一个渲染视角里理解。',
+    blocks: [
+      { title: 'Step 1 · 先判断有没有影响几何信息', summary: '影响尺寸和位置时更容易重排，只改外观时通常更偏重绘。', bullets: ['layout change', 'paint change', 'forced layout'] },
+      { title: 'Step 2 · 动画题要顺手提 transform / opacity', summary: '这会让你的回答从定义题直接提升到性能题。', code: { language: 'js', title: 'Animation Hint', snippet: `bad -> top/left\ngood -> transform/opacity` } },
+    ]
+  },
+  'browser-events-summary': {
+    heading: '事件传播使用概览',
+    description: '这页把捕获、冒泡、事件委托和常见交互 bug 放到同一条传播路径里理解。',
+    blocks: [
+      { title: 'Step 1 · 先记住方向', summary: '捕获从外往里，冒泡从里往外，这一步决定很多题会不会答反。', bullets: ['capture', 'target', 'bubble'] },
+      { title: 'Step 2 · 事件委托要和动态列表场景绑定', summary: '只背定义不够，最好直接联想到列表点击和统一监听。', code: { language: 'js', title: 'Delegate', snippet: `list.addEventListener("click", (event) => {\n  const item = event.target.closest("[data-id]")\n})` } },
+    ]
+  },
+  'browser-cross-origin-summary': {
+    heading: '跨域使用概览',
+    description: '这页把同源策略、CORS、JSONP、代理和带凭证请求放到同一个跨域模型里讲清楚。',
+    blocks: [
+      { title: 'Step 1 · 先把跨域理解成浏览器限制', summary: '很多时候请求并不是发不出去，而是响应不让前端脚本读。', bullets: ['同源策略', '浏览器限制', '服务端可达不等于前端可读'] },
+      { title: 'Step 2 · 开发代理和生产网关都值得主动提', summary: '这会让跨域题从“背知识点”变成“懂工程方案”。', code: { language: 'js', title: 'Proxy', snippet: `前端 -> 本地同源代理 -> 真实接口` } },
+    ]
+  },
+  'browser-storage-summary': {
+    heading: '浏览器存储使用概览',
+    description: '这页把 cookie、localStorage、sessionStorage、IndexedDB 放到生命周期和场景视角里统一整理。',
+    blocks: [
+      { title: 'Step 1 · 先看生命周期和是否自动带请求', summary: '这通常比背容量更重要。', bullets: ['cookie', 'localStorage', 'sessionStorage', 'IndexedDB'] },
+      { title: 'Step 2 · 存储题最好顺手带安全视角', summary: '很多选型问题不是“能不能存”，而是“适不适合这样存”。', code: { language: 'js', title: 'Storage View', snippet: `生命周期\n自动发送?\n数据量\n安全性` } },
+    ]
+  },
+  'browser-security-summary': {
+    heading: '浏览器安全使用概览',
+    description: '这页把 XSS、CSRF、点击劫持和对应防护方式整理成一条更容易理解的安全主线。',
+    blocks: [
+      { title: 'Step 1 · 先分清是脚本注入、借身份请求还是诱导误点', summary: '这一步能快速把 XSS、CSRF、点击劫持分开。', bullets: ['XSS', 'CSRF', 'Clickjacking'] },
+      { title: 'Step 2 · 安全题最好按攻击路径 + 防护点回答', summary: '这样不会只停留在缩写解释，会更像真实工程理解。', code: { language: 'js', title: 'Answer Structure', snippet: `攻击路径 -> 受害条件 -> 防护点 -> 工程措施` } },
+    ]
+  },
+  'es6-collections-summary': {
+    heading: 'ES6 集合类型使用概览',
+    description: '这页把 Map、Set、WeakMap、WeakSet 放在同一个集合模型里理解，重点是语义和使用场景。',
+    blocks: [
+      {
+        title: 'Step 1 · 先分清集合语义',
+        summary: 'Map 是键值集合，Set 是唯一值集合，WeakMap / WeakSet 则引入了弱引用和生命周期语义。',
+        bullets: ['Map：任意类型键', 'Set：值唯一', 'WeakMap / WeakSet：对象弱引用']
+      },
+      {
+        title: 'Step 2 · 对象去重和对象缓存是两类不同问题',
+        summary: '对象去重通常要按业务主键来做；对象元信息缓存则往往更适合 WeakMap。',
+        code: {
+          language: 'js',
+          title: 'Map Dedup By Id',
+          snippet: `const deduped = [...new Map(users.map((item) => [item.id, item])).values()];`
+        }
+      },
+      {
+        title: 'Step 3 · 弱引用集合不是主数据容器',
+        summary: 'WeakMap / WeakSet 不能遍历，更适合做辅助状态、私有元信息和对象级缓存。',
+        code: {
+          language: 'js',
+          title: 'Weak Metadata',
+          snippet: `const meta = new WeakMap();
+meta.set(node, { measured: true });`
+        }
+      }
+    ]
+  },
+  'functional-utils-summary': {
+    heading: '函数工具使用概览',
+    description: '这页把防抖、节流、柯里化、偏函数和函数组合放在一起，重点是场景选择而不是死背模板。',
+    blocks: [
+      {
+        title: 'Step 1 · 先判断是在控频还是在组织函数',
+        summary: '防抖 / 节流解决调用时机；柯里化 / 组合解决参数复用和函数拆分。',
+        bullets: ['控频：debounce / throttle', '结构：curry / compose / pipe']
+      },
+      {
+        title: 'Step 2 · 搜索、防抖；滚动、节流',
+        summary: '前者更关心最终输入，后者更关心持续反馈，这就是最稳定的答题切入点。',
+        code: {
+          language: 'js',
+          title: 'Rate Control',
+          snippet: `const onSearch = debounce(requestSearch, 250);
+const onScroll = throttle(syncProgress, 100);`
+        }
+      },
+      {
+        title: 'Step 3 · 组合的价值是把逻辑拆小',
+        summary: '重点不是 reduce 写法，而是能不能把数据处理链拆成多个清晰步骤。',
+        code: {
+          language: 'js',
+          title: 'Pipe Example',
+          snippet: `const normalize = pipe(trim, lower, withPrefix);`
+        }
+      }
+    ]
+  },
+  'module-system-summary': {
+    heading: '模块化：ESM 与 CommonJS 使用概览',
+    description: '这页把 ESM、CommonJS、静态分析、live binding 和工程互操作问题整理成一个统一视角。',
+    blocks: [
+      {
+        title: 'Step 1 · 先把模块题从语法题提升到工程题',
+        summary: '模块系统的真正差异，不只是 import 和 require 写法，而是分析能力、加载时机和互操作成本。',
+        bullets: ['静态分析', '运行时加载', '构建工具兼容']
+      },
+      {
+        title: 'Step 2 · tree shaking 的核心前提是静态结构',
+        summary: 'ESM 不是自带 tree shaking，而是更适合让打包器识别未使用导出。',
+        code: {
+          language: 'js',
+          title: 'Static Export',
+          snippet: `export const add = (a, b) => a + b;
+import { add } from "./math.js";`
+        }
+      },
+      {
+        title: 'Step 3 · live binding 和循环依赖必须一起理解',
+        summary: '模块题里很多“为什么这里拿到的是最新值”或“为什么这里是 undefined”都和绑定与初始化顺序有关。',
+        code: {
+          language: 'js',
+          title: 'Live Binding',
+          snippet: `export let count = 0;
+export function increment() { count += 1; }`
+        }
+      }
+    ]
+  },
+  'vite-webpack-summary': {
+    heading: 'Vite 和 Webpack 使用概览',
+    description: '这页把开发体验、生产构建、插件生态和迁移成本放在一起，避免把两者对比答成单纯快慢题。',
+    blocks: [
+      {
+        title: 'Step 1 · 先分开发期和生产期',
+        summary: '开发体验和生产打包不是同一个问题，这一步能让你的回答立刻变清晰。',
+        bullets: ['开发期看冷启动和 HMR', '生产期看拆包、压缩和兼容', '不要把两个阶段揉在一起']
+      },
+      {
+        title: 'Step 2 · 再把项目阶段带进来',
+        summary: '新项目和老项目的答案经常不同，迁移成本和历史包袱不能忽略。',
+        code: {
+          language: 'js',
+          title: 'Tradeoff View',
+          snippet: `新项目 -> 更看开发体验
+老项目 -> 更看兼容与迁移成本`
+        }
+      }
+    ]
+  },
+  'tree-shaking-summary': {
+    heading: 'Tree Shaking 使用概览',
+    description: '这页把静态分析、副作用、导入方式和组件库设计放回同一条摇树主线里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先讲静态分析，再讲副作用',
+        summary: 'Tree shaking 的关键不是“想删就删”，而是“能安全确认这段代码没必要保留”。',
+        bullets: ['ESM 更利于分析', '副作用会让工具更保守', '验证要看产物']
+      },
+      {
+        title: 'Step 2 · 组件库场景更容易拉开差异',
+        summary: '导出方式、入口结构和副作用控制，会直接影响消费方的摇树效果。',
+        code: {
+          language: 'js',
+          title: 'Library Export',
+          snippet: `export { Button } from './button'
+export { Dialog } from './dialog'`
+        }
+      }
+    ]
+  },
+  'babel-summary': {
+    heading: 'Babel 使用概览',
+    description: '这页把 Babel 放回源码转换流水线里理解，重点区分语法转换、polyfill 和打包职责。',
+    blocks: [
+      {
+        title: 'Step 1 · 把 Babel 当成 parse / transform / generate 流水线',
+        summary: '这样会比背 preset 名字更稳定，也更方便解释插件到底在做什么。',
+        bullets: ['先 parse 成 AST', '再 transform', '最后 generate 代码']
+      },
+      {
+        title: 'Step 2 · 语法兼容和运行时能力分开答',
+        summary: 'Babel 能改写语法，但不代表环境自动拥有新 API。',
+        code: {
+          language: 'js',
+          title: 'Syntax vs Runtime',
+          snippet: `语法转换 -> Babel
+API 能力 -> polyfill / runtime`
+        }
+      }
+    ]
+  },
+  'typescript-interview-summary': {
+    heading: 'TypeScript 常见题使用概览',
+    description: '这页重点不在炫技类型，而在于用泛型、联合类型、类型守卫和 infer 表达真实数据关系。',
+    blocks: [
+      {
+        title: 'Step 1 · 先判断是复用问题还是不确定问题',
+        summary: '复用关系多半是泛型，不确定范围多半是联合类型。',
+        bullets: ['泛型看复用', '联合看不确定', '守卫负责缩小范围']
+      },
+      {
+        title: 'Step 2 · infer 主要是做类型提取',
+        summary: '它最适合从现有结构里拿信息，而不是把类型写成谜语。',
+        code: {
+          language: 'ts',
+          title: 'Infer Example',
+          snippet: `type Unwrap<T> = T extends Promise<infer Value> ? Value : T`
+        }
+      }
+    ]
+  },
+  'package-manager-summary': {
+    heading: '包管理使用概览',
+    description: '这页把 npm、yarn、pnpm 放回依赖安装、锁文件、workspace 和 CI 一致性里比较。',
+    blocks: [
+      {
+        title: 'Step 1 · 包管理题先讲 lockfile',
+        summary: '这比单独比较命令更有工程价值，因为它直接关系到团队安装是否一致。',
+        bullets: ['锁定依赖树', '减少环境漂移', '支撑 CI 一致性']
+      },
+      {
+        title: 'Step 2 · Monorepo 再讲 workspace',
+        summary: '多包协作场景里，workspace 和依赖链接方式会比单项目更重要。',
+        code: {
+          language: 'bash',
+          title: 'Workspace Shape',
+          snippet: `packages/
+  ui/
+  web/
+  admin/`
+        }
+      }
+    ]
+  },
+  'engineering-workflow-summary': {
+    heading: '工程质量流程使用概览',
+    description: '这页把 CI/CD、代码规范、lint、测试和发布回滚串成一条完整质量链路。',
+    blocks: [
+      {
+        title: 'Step 1 · 先讲风险在哪一层被挡住',
+        summary: '本地、PR、CI、发布后监控分别负责不同的质量挡板。',
+        bullets: ['本地快速反馈', 'PR 自动检查', 'CI 干净复验', '发布可回滚']
+      },
+      {
+        title: 'Step 2 · 机器检查和人工评审分工',
+        summary: '把机械规则交给自动化，人审聚焦设计、边界和可读性。',
+        code: {
+          language: 'bash',
+          title: 'Review Split',
+          snippet: `自动化 -> lint / typecheck / test
+人工 -> 设计 / 边界 / 可维护性`
+        }
+      }
+    ]
+  },
+  'engineering-optimization-summary': {
+    heading: '工程化优化使用概览',
+    description: '这页把代码分割、懒加载、缓存、运行时优化和监控验证整理成一个完整闭环。',
+    blocks: [
+      {
+        title: 'Step 1 · 优化先分层',
+        summary: '构建期、加载期、运行期、监控验证这四层能让你的回答更完整。',
+        bullets: ['构建期更看产物', '加载期更看首屏', '运行期更看交互', '监控负责验证']
+      },
+      {
+        title: 'Step 2 · 代码分割和懒加载分开答',
+        summary: '一个解决怎么拆，一个解决何时加载。',
+        code: {
+          language: 'tsx',
+          title: 'Lazy Route',
+          snippet: `const ReportPage = lazy(() => import('./ReportPage'))`
+        }
+      }
+    ]
+  },
+  'module-tools-summary': {
+    heading: '模块化：ESM 和 CommonJS 使用概览',
+    description: '这页把静态分析、运行时加载、live binding 和互操作放在一起理解，比单纯比语法更接近真实工程。',
+    blocks: [
+      {
+        title: 'Step 1 · 模块题先讲静态结构和时机',
+        summary: 'ESM 更静态，CommonJS 更偏运行时动态加载，这会直接影响构建优化。',
+        bullets: ['ESM 更利于分析', 'CommonJS 更灵活', '时机会影响值是否可用']
+      },
+      {
+        title: 'Step 2 · live binding 和循环依赖要顺手提',
+        summary: '很多模块题真正的坑都在值绑定和初始化顺序上。',
+        code: {
+          language: 'js',
+          title: 'Live Binding',
+          snippet: `export let count = 0
+export const inc = () => { count += 1 }`
+        }
+      }
+    ]
+  },
+  'list-performance-scenario': {
+    heading: '大列表卡顿优化使用概览',
+    description: '这页把节点数、单行重量、搜索重算、虚拟列表和服务端分页放回同一条优化主线里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先区分卡在首屏、滚动还是搜索',
+        summary: '三种卡顿的瓶颈通常不同，别一上来就只说虚拟列表。',
+        bullets: ['首屏更看节点量', '滚动更看可见区和单行重量', '搜索更看重算频率']
+      },
+      {
+        title: 'Step 2 · 优化顺序通常是先减节点，再降重算',
+        summary: '分页、虚拟列表、deferred value 和服务端筛选经常是组合使用。',
+        code: {
+          language: 'tsx',
+          title: 'Deferred Search',
+          snippet: `const deferredKeyword = useDeferredValue(keyword)
+const filteredRows = useMemo(() => filterRows(rows, deferredKeyword), [rows, deferredKeyword])`
+        }
+      }
+    ]
+  },
+  'white-screen-debug-scenario': {
+    heading: '白屏排查使用概览',
+    description: '这页把页面白屏从网络、资源、入口执行、渲染和样式展示几层逐步拆开。',
+    blocks: [
+      {
+        title: 'Step 1 · 白屏先走启动链路，不先猜业务代码',
+        summary: '先看 HTML、JS/CSS、Console 和 root 挂载，比直接翻组件更稳。',
+        bullets: ['Document', 'Assets', 'Bootstrap', 'Render'] 
+      },
+      {
+        title: 'Step 2 · 线上白屏一定要有监控兜底',
+        summary: '版本号、资源 URL、首个错误栈和 route 信息都会明显提高定位效率。',
+        code: {
+          language: 'js',
+          title: 'Startup Error Report',
+          snippet: `window.addEventListener('error', (event) => {
+  reportStartupError({ message: event.message, route: location.pathname, version: APP_VERSION })
+})`
+        }
+      }
+    ]
+  },
+  'api-concurrency-scenario': {
+    heading: '接口慢与并发治理使用概览',
+    description: '这页把防抖、去重、取消、并发限制、重试和降级串成完整的请求治理流程。',
+    blocks: [
+      {
+        title: 'Step 1 · 先分接口本身慢，还是请求发太多',
+        summary: '根因不同，解决手段也不同，这一步最关键。',
+        bullets: ['单接口慢', '重复请求多', '并发无上限', '优先级不合理']
+      },
+      {
+        title: 'Step 2 · 在途请求治理往往最容易见效',
+        summary: '相同请求去重、取消旧请求、限制并发数，是非常实用的一组手段。',
+        code: {
+          language: 'js',
+          title: 'In-flight Dedup',
+          snippet: `const inflight = new Map()
+if (inflight.has(key)) return inflight.get(key)`
+        }
+      }
+    ]
+  },
+  'component-refactor-scenario': {
+    heading: '组件重构使用概览',
+    description: '这页把“难维护组件”的重构思路拆成职责识别、状态抽离、UI 分层和渐进迁移四步。',
+    blocks: [
+      {
+        title: 'Step 1 · 先拆职责，不先拆文件',
+        summary: '数据、展示、副作用、权限和弹窗状态混在一起时，最先处理的是边界。',
+        bullets: ['职责识别', '变化点识别', '容器与展示分层']
+      },
+      {
+        title: 'Step 2 · 渐进迁移比重写更稳',
+        summary: '通过 hook、reducer、新旧实现并存和 feature flag 逐步替换，风险更可控。',
+        code: {
+          language: 'tsx',
+          title: 'Gradual Migration',
+          snippet: `return useNewFlow ? <OrdersPageRefactored /> : <OrdersPageLegacy />`
+        }
+      }
+    ]
+  },
+  'component-library-scenario': {
+    heading: '组件库设计使用概览',
+    description: '这页把 token、基础组件、pattern、文档和迁移推广放回组件库建设全流程里理解。',
+    blocks: [
+      {
+        title: 'Step 1 · 先做基础设施，不先追求大而全',
+        summary: 'token、Button、Input、Dialog 这类基础能力通常比大量业务组件更值得先做。',
+        bullets: ['Token', 'Primitive', 'Pattern', 'Docs']
+      },
+      {
+        title: 'Step 2 · API 要围绕高频路径设计',
+        summary: '合理默认值、语义化参数和文档示例，比开一堆低价值开关更重要。',
+        code: {
+          language: 'ts',
+          title: 'Button API',
+          snippet: `type ButtonProps = {
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  loading?: boolean
+}`
+        }
+      }
+    ]
+  },
+  'frontend-system-scenario': {
+    heading: '权限、守卫、埋点、国际化使用概览',
+    description: '这页把四类横切能力统一看成基础设施问题，重点放在统一模型和统一接入。',
+    blocks: [
+      {
+        title: 'Step 1 · 横切能力先统一模型',
+        summary: '权限 key、路由 meta、埋点事件 schema、i18n key 都应该统一定义。',
+        bullets: ['Permission key', 'Route meta', 'Track schema', 'Locale dictionary']
+      },
+      {
+        title: 'Step 2 · 页面层只消费能力',
+        summary: '页面不应该自己手搓一套守卫、埋点和翻译逻辑。',
+        code: {
+          language: 'tsx',
+          title: 'Guarded Route',
+          snippet: `if (route.permission && !can(user, route.permission)) {
+  return <Navigate to="/403" replace />
+}`
+        }
+      }
+    ]
+  },
   'react-query-demo': {
     heading: 'React Query Demo 使用概览',
     description: 'React Query 主要管理服务端状态。建议按“Provider 注入 -> query 定义 -> mutation 失效 -> UI 状态反馈”顺序落地。',
