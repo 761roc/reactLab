@@ -1,7 +1,17 @@
 import type { LazyExoticComponent, ReactElement } from 'react';
 import type { FeatureGuide } from './feature-guide-types';
 
-export type FeatureCategory = 'css' | 'react' | 'components' | 'content' | 'browser' | 'engineering' | 'scenario' | 'reactInterview' | 'vueInterview';
+export type FeatureCategory =
+  | 'css'
+  | 'react'
+  | 'components'
+  | 'content'
+  | 'browser'
+  | 'engineering'
+  | 'scenario'
+  | 'reactInterview'
+  | 'vueInterview'
+  | 'interviewHistory';
 
 export interface FeatureModule {
   id: string;

@@ -18,6 +18,8 @@ import { es6CollectionsSummaryFeature } from "../features/es6-collections-summar
 import { eventLoopSummaryFeature } from "../features/event-loop-summary";
 import { frontendSystemScenarioFeature } from "../features/frontend-system-scenario";
 import { functionalUtilsSummaryFeature } from "../features/functional-utils-summary";
+import { interviewHistoryZhongkeyunshengInterfaceTypeFeature } from "../features/interview-history-zhongkeyunsheng-interface-type";
+import { interviewHistoryZhongkeyunshengUseStateFeature } from "../features/interview-history-zhongkeyunsheng-usestate";
 import { jotaiDemoFeature } from "../features/jotai-demo";
 import { listPerformanceScenarioFeature } from "../features/list-performance-scenario";
 import { mobxDemoFeature } from "../features/mobx-demo";
@@ -105,6 +107,8 @@ const features: FeatureModule[] = [
   reactConcurrencySummaryFeature,
   reactCustomHookSummaryFeature,
   reactPerformanceSummaryFeature,
+  interviewHistoryZhongkeyunshengUseStateFeature,
+  interviewHistoryZhongkeyunshengInterfaceTypeFeature,
   vueCoreConceptsSummaryFeature,
   vueCommonApiSummaryFeature,
   vueInterviewTopicsSummaryFeature,

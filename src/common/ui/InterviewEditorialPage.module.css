@@ -1,0 +1,494 @@
+.page {
+  --paper-bg: #f8f2e7;
+  --paper-panel: rgba(255, 251, 245, 0.94);
+  --paper-line: rgba(81, 56, 34, 0.18);
+  --paper-strong: #2c1f14;
+  --paper-muted: #6d5643;
+  --paper-accent: #8b2e1f;
+  --paper-gold: #8e6c2d;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--paper-strong);
+  padding: 4px;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    "Baskerville",
+    Georgia,
+    serif;
+}
+
+.masthead,
+.banner,
+.comparisonPanel,
+.story {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--paper-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 249, 241, 0.88)),
+    var(--paper-bg);
+  box-shadow: 0 20px 60px -42px rgba(37, 24, 15, 0.5);
+}
+
+.masthead {
+  padding: 26px 28px 30px;
+  border-radius: 28px 28px 18px 18px;
+}
+
+.masthead::after,
+.story::before,
+.comparisonPanel::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(124, 97, 70, 0.14);
+  pointer-events: none;
+}
+
+.issueMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-muted);
+}
+
+.issueMeta span {
+  padding-right: 12px;
+  border-right: 1px solid var(--paper-line);
+}
+
+.issueMeta span:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.mastTitle {
+  margin: 16px 0 10px;
+  font-size: clamp(40px, 7vw, 82px);
+  line-height: 0.96;
+  letter-spacing: 0.08em;
+  text-align: center;
+  font-weight: 700;
+}
+
+.mastSubtitle {
+  max-width: 62ch;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--paper-muted);
+}
+
+.banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.85fr);
+  gap: 22px;
+  padding: 24px 26px;
+  border-radius: 18px;
+}
+
+.banner h2,
+.comparisonIntro h2 {
+  margin: 8px 0 0;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.08;
+}
+
+.banner p,
+.comparisonIntro p,
+.storyAbstract,
+.quickAnswerBox p,
+.storyCopy p,
+.factCard span,
+.factCard strong,
+.pullQuote p,
+.railList li {
+  line-height: 1.85;
+}
+
+.banner p,
+.comparisonIntro p,
+.storyAbstract,
+.storyCopy p,
+.railList li {
+  color: var(--paper-muted);
+}
+
+.bannerEyebrow,
+.sectionEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-accent);
+}
+
+.bannerBrief {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 1px solid var(--paper-line);
+  padding-left: 20px;
+}
+
+.questionTicker {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.comparisonPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 22px;
+  padding: 24px 26px;
+  border-radius: 18px;
+}
+
+.comparisonIntro {
+  padding-right: 8px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.compareTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.compareTable th,
+.compareTable td {
+  padding: 14px 16px;
+  border: 1px solid var(--paper-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.compareTable th {
+  background: rgba(109, 86, 67, 0.08);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.compareTable td {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.story {
+  padding: 28px 28px 30px;
+  border-radius: 18px 18px 26px 26px;
+}
+
+.storyHeader {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--paper-line);
+}
+
+.storyIndex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.storyLabel {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-gold);
+}
+
+.storyBadge {
+  display: inline-flex;
+  border: 1px solid rgba(139, 46, 31, 0.16);
+  background: rgba(139, 46, 31, 0.08);
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--paper-accent);
+}
+
+.strapline {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-accent);
+}
+
+.storyTitle {
+  margin: 8px 0 12px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.02;
+}
+
+.storyAbstract {
+  margin: 0;
+  max-width: 70ch;
+  font-size: 16px;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.72fr);
+  gap: 24px;
+  padding-top: 22px;
+}
+
+.storyMain {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.quickAnswerBox {
+  border: 1px solid rgba(139, 46, 31, 0.18);
+  background: linear-gradient(180deg, rgba(139, 46, 31, 0.04), rgba(255, 255, 255, 0.66));
+  padding: 18px 18px 20px;
+}
+
+.quickAnswerBox p {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: var(--paper-strong);
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.factCard {
+  border: 1px solid var(--paper-line);
+  background: var(--paper-panel);
+  padding: 14px 16px;
+}
+
+.factCard span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-muted);
+}
+
+.factCard strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+  color: var(--paper-strong);
+}
+
+.storySection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(81, 56, 34, 0.22);
+}
+
+.storySectionHeader {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.storySectionHeader span {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-accent);
+}
+
+.storySectionHeader h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.storyCopy {
+  column-count: 2;
+  column-gap: 22px;
+}
+
+.storyCopy p {
+  margin: 0 0 14px;
+  font-size: 16px;
+  break-inside: avoid;
+}
+
+.openingParagraph::first-letter {
+  float: left;
+  margin: 4px 10px 0 0;
+  font-size: 3.1em;
+  line-height: 0.82;
+  color: var(--paper-accent);
+  font-weight: 700;
+}
+
+.inlineBulletList,
+.railList {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.inlineBulletList {
+  display: grid;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--paper-strong);
+}
+
+.inlineBulletList li::marker,
+.railList li::marker,
+.questionTicker li::marker {
+  color: var(--paper-accent);
+}
+
+.codeFrame {
+  border: 1px solid rgba(44, 31, 20, 0.14);
+  background: #1f1713;
+  color: #f5e8d8;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(245, 232, 216, 0.14);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 232, 216, 0.78);
+}
+
+.codeBlock {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.75;
+  font-family:
+    "IBM Plex Mono",
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+.storyRail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pullQuote,
+.railCard {
+  border: 1px solid var(--paper-line);
+  background: var(--paper-panel);
+  padding: 16px 18px;
+}
+
+.pullQuote p {
+  margin: 12px 0 0;
+  font-size: 28px;
+  line-height: 1.34;
+  color: var(--paper-strong);
+}
+
+.railList {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 1120px) {
+  .banner,
+  .comparisonPanel,
+  .storyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bannerBrief {
+    border-left: 0;
+    border-top: 1px solid var(--paper-line);
+    padding-left: 0;
+    padding-top: 18px;
+  }
+
+  .storyRail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 840px) {
+  .masthead,
+  .banner,
+  .comparisonPanel,
+  .story {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .storyHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .storyCopy {
+    column-count: 1;
+  }
+
+  .factGrid,
+  .storyRail {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .mastTitle {
+    letter-spacing: 0.04em;
+  }
+
+  .storyTitle {
+    font-size: 28px;
+  }
+
+  .storySectionHeader {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .pullQuote p {
+    font-size: 22px;
+  }
+}
