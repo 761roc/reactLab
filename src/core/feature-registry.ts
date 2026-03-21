@@ -35,6 +35,7 @@ import { engineeringInterviewSourcemapManagementFeature } from "../features/engi
 import { engineeringInterviewTreeShakingFeature } from "../features/engineering-interview-tree-shaking-failure";
 import { engineeringInterviewViteWebpackFeature } from "../features/engineering-interview-vite-vs-webpack";
 import { engineeringInterviewWhiteScreenFeature } from "../features/engineering-interview-white-screen-analysis";
+import { exhibitionScreenDemoFeature } from "../features/exhibition-screen-demo";
 import { es6CollectionsSummaryFeature } from "../features/es6-collections-summary";
 import { eventLoopSummaryFeature } from "../features/event-loop-summary";
 import { frontendSystemScenarioFeature } from "../features/frontend-system-scenario";
@@ -106,6 +107,7 @@ import type { FeatureModule } from "./feature-types";
 const features: FeatureModule[] = [
   tailwindDemoFeature,
   responsiveWebDemoFeature,
+  exhibitionScreenDemoFeature,
   reactQueryDemoFeature,
   reactContextDemoFeature,
   reduxDemoFeature,
