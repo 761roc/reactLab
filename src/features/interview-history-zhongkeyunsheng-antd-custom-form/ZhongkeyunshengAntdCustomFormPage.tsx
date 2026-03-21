@@ -117,6 +117,7 @@ export default function ZhongkeyunshengAntdCustomFormPage() {
         '没有提动态字段、异步校验和联动机制。',
         '忽略性能、权限和只读/审批态这类真实系统问题。',
       ]}
+      singleColumn
     />
   );
 }

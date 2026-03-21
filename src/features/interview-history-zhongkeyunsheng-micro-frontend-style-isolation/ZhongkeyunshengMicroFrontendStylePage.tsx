@@ -125,6 +125,7 @@ export default function ZhongkeyunshengMicroFrontendStylePage() {
         '把 iframe 当默认方案，却忽略通信和体验成本。',
       ]}
       comparisonTable={comparisonTable}
+      singleColumn
     />
   );
 }

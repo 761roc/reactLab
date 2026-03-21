@@ -111,6 +111,7 @@ export default function ZhongkeyunshengStateSchemesPage() {
         '说 Zustand 轻量，却说不清它为什么更适合统计页面。',
       ]}
       comparisonTable={comparisonTable}
+      singleColumn
     />
   );
 }

@@ -157,6 +157,7 @@ export default function ZhongkeyunshengInterfaceTypePage() {
         '没提到 union、tuple、mapped type、conditional type，导致 type 的优势场景说不完整。',
       ]}
       comparisonTable={comparisonTable}
+      singleColumn
     />
   );
 }

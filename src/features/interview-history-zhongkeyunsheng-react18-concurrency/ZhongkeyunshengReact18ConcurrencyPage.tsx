@@ -119,6 +119,7 @@ export default function ZhongkeyunshengReact18ConcurrencyPage() {
         '只会说 `startTransition`，说不清底层调度和优先级模型。',
         '忽略 commit 阶段仍要同步一致这一边界。',
       ]}
+      singleColumn
     />
   );
 }

@@ -114,6 +114,7 @@ export default function ZhongkeyunshengCrossPlatformPage() {
         '不先澄清业务目标端，就直接给出绝对选型结论。',
       ]}
       comparisonTable={comparisonTable}
+      singleColumn
     />
   );
 }

@@ -132,6 +132,7 @@ export default function ZhongkeyunshengAsyncEvolutionPage() {
         '把 async/await 误解成完全脱离 Promise 的新机制。',
         '说 Generator 时忽略它本身不自动处理异步这一点。',
       ]}
+      singleColumn
     />
   );
 }

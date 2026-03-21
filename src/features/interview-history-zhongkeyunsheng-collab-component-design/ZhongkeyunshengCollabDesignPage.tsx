@@ -117,6 +117,7 @@ export default function ZhongkeyunshengCollabDesignPage() {
         '没有讲冲突解决模型，只谈实时传输。',
         '忽略权限、审计、离线和大文档性能问题。',
       ]}
+      singleColumn
     />
   );
 }

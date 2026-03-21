@@ -148,6 +148,7 @@ export default function ZhongkeyunshengUseStatePage() {
         '把“异步更新”理解成定时器式异步，而不是 React 自己的调度与结算模型。',
         '说不清为什么连续多次 setState 时，函数式更新比直接读旧值更可靠。',
       ]}
+      singleColumn
     />
   );
 }

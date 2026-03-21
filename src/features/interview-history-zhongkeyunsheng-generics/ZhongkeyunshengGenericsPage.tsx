@@ -203,6 +203,7 @@ export default function ZhongkeyunshengGenericsPage() {
         '把泛型回答成“任何类型都可以”，却说不清约束为什么重要。',
         '使用场景只答函数和类，没有落到接口返回、Hook、组件和工具类型。',
       ]}
+      singleColumn
     />
   );
 }

@@ -209,6 +209,7 @@ export default function ZhongkeyunshengUnionSafetyPage() {
         '只会写 `|`，不会设计区分字段，也不会做收窄和穷尽检查。',
         '用一个大对象加很多可选字段替代联合类型，制造出大量非法状态。',
       ]}
+      singleColumn
     />
   );
 }

@@ -110,6 +110,7 @@ export default function ZhongkeyunshengWebPerfAnalysisPage() {
         '只会说工具，不会按网络、资源、渲染、业务逻辑做归因。',
         '优化之后没有验证指标是否真的改善。',
       ]}
+      singleColumn
     />
   );
 }

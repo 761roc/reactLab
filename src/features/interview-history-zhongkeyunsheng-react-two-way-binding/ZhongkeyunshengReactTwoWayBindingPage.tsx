@@ -130,6 +130,7 @@ export default function ZhongkeyunshengReactTwoWayBindingPage() {
         '把 React 双向绑定误解成模板层自动同步，而不是显式事件回写。',
         '忽略复杂表单里的校验、联动和性能问题。',
       ]}
+      singleColumn
     />
   );
 }
